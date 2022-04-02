@@ -8,6 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'pen/codeMaker.css' %}">
+    <script src="{% static 'pen/codeMaker.js' %}"></script>
     <title>Code Maker</title>
 </head>
 <body>
@@ -22,7 +23,7 @@
             <button class="zoom-buttons" id="zoom-out">➖</button>
         </div>
         <div id="codeArea">
-            <textarea tabindex="1" placeholder="Write your HTML here..."></textarea>
+            <textarea spellcheck="false" tabindex="1" placeholder="Write your HTML here..."></textarea>
         </div>
         <div id="viewArea">
             <span style="display:block; margin: 20px 40px;">Your changes will be displayed here</span>

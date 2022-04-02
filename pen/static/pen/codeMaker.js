@@ -17,14 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
            -P4NUCH0
         */
 
-
-
-
-        if (event.key === "Enter") {
-
-           // Add a new line count and a remember for the TAB
-
-        } else if (event.key === "'" || event.key === '"'){            
+        if (event.key === "'" || event.key === '"'){            
             const index = textArea.selectionStart;
             const newString = textArea.value.slice(0, index) + event.key + textArea.value.slice(index, textArea.value.length);
             
@@ -50,8 +43,6 @@ document.addEventListener("DOMContentLoaded", () => {
                             textArea.value + 
                             `</body>
                         </html>`;
-
-        /* Wait, we are going in a good direction, we should make work the JS and CSS views */
         
         const file = new Blob([newValue], {type:"text/html"});
         viewArea.innerHTML = `<iframe id="frame-view" src="${window.URL.createObjectURL(file)}"></iframe>`;
@@ -79,10 +70,9 @@ document.addEventListener("DOMContentLoaded", () => {
             });
 
             button.style.background = "#114b";
-            button.style.color = "#fff"
+            button.style.color = "#fff";
 
-            /* We should make this work... Not only visual */
-            textArea.placeholder = `Write your ${(button.id).toString().slice(7, 40)} here...`
+            textArea.placeholder = `Write your ${(button.id).toString().slice(7, 40)} here...`;
         });
     });
 
