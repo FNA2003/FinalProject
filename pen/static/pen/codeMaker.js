@@ -1,9 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    /* 
-        I should use more functions, right?
-    */
-    let firstStart = 0;
-    let INTERVAL = 2000;
+    const INTERVAL = 1500;
 
     const textArea = document.querySelector("textarea");
     const viewArea = document.querySelector("#viewArea");
@@ -12,22 +8,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const zoomOut = document.querySelector("#zoom-out");
 
     textArea.addEventListener("keyup", () => {
-        /* Here is the delay! */
-        let date = new Date();
 
-        if (firstStart === 0) {
-            firstStart = date.getTime();
-        } else {
-            if ((date.getTime() - firstStart) <= INTERVAL) {
-                return;
-            } else {
-                firstStart = date.getTime();
-            }
-        }
-        /* Delay! */
+        writeView(event);        
 
-        writeView(event);
-        
     });
 
     window.addEventListener("keydown", tabulation);
@@ -89,7 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
             return true; 
         }
 
-        return true;
+        return false;
     }
 
     function writeView(event) {
@@ -99,6 +82,13 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
+        setTimeout(htmlView, INTERVAL);
+
+    }
+
+    function htmlView() {
+        const cssFile = new Blob([`*{color: red;}`], {type:"text/css"});
+
         /* Hey! We should make a query to know if we are writing the html or css file */
         const newValue =`<!DOCTYPE html>
                         <html lang="en">
@@ -106,6 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                 <meta charset="UTF-8">
                                 <meta http-equiv="X-UA-Compatible" content="IE=edge">
                                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                                <link rel="stylesheet" href="${window.URL.createObjectURL(cssFile)}">
                                 <title>Document</title>
                             </head>
                             <body>` + 
