@@ -6,6 +6,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const zoomIn = document.querySelector("#zoom-in");
     const zoomOut = document.querySelector("#zoom-out");
+    
+    mainFile();
 
     textArea.addEventListener("keyup", () => {
 
@@ -20,8 +22,11 @@ document.addEventListener("DOMContentLoaded", () => {
             document.querySelectorAll(".window-change").forEach(btn => {
                 btn.style.background = "#ddd"; 
                 btn.style.color = "#000"; 
+
+                btn.dataset.active = "false";
             });
 
+            button.dataset.active = "true";
             button.style.background = "#114b";
             button.style.color = "#fff";
 
@@ -78,31 +83,38 @@ document.addEventListener("DOMContentLoaded", () => {
     function writeView(event) {
         complete(event);
 
-        if (checkEmptiness() == true){
+        if (checkEmptiness() === true){
             return;
         }
 
-        setTimeout(htmlView, INTERVAL);
+        if ((event.key).includes("Arrow")) {
+            return;
+        }
+
+
+        setTimeout(mainFile, INTERVAL);
 
     }
 
-    function htmlView() {
-        const cssFile = new Blob([`*{color: red;}`], {type:"text/css"});
+    function mainFile() {
+        const cssFile = new Blob([], {type:"text/css"});
+        const jsFile = new Blob([], {type:"text/js"});
 
         /* Hey! We should make a query to know if we are writing the html or css file */
         const newValue =`<!DOCTYPE html>
-                        <html lang="en">
-                            <head>
-                                <meta charset="UTF-8">
-                                <meta http-equiv="X-UA-Compatible" content="IE=edge">
-                                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                                <link rel="stylesheet" href="${window.URL.createObjectURL(cssFile)}">
-                                <title>Document</title>
-                            </head>
-                            <body>` + 
-                            textArea.value + 
-                            `</body>
-                        </html>`;
+                         <html lang="en">
+                             <head>
+                                 <meta charset="UTF-8">
+                                 <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                                 <link rel="stylesheet" href="${window.URL.createObjectURL(cssFile)}">
+                                 <script src="${window.URL.createObjectURL(jsFile)}"></script> 
+                                 <title>Document</title>
+                             </head>
+                             <body>` + 
+                             textArea.value + 
+                             `</body>
+                         </html>`;
         
         const file = new Blob([newValue], {type:"text/html"});
         viewArea.innerHTML = `<iframe id="frame-view" src="${window.URL.createObjectURL(file)}"></iframe>`;
