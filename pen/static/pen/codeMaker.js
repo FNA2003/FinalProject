@@ -18,7 +18,6 @@ document.addEventListener("DOMContentLoaded", () => {
         if (firstStart === 0) {
             firstStart = date.getTime();
         } else {
-            console.log((date.getTime() - firstStart));
             if ((date.getTime() - firstStart) <= INTERVAL) {
                 return;
             } else {
