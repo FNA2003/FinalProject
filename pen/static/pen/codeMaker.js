@@ -2,6 +2,8 @@ document.addEventListener("DOMContentLoaded", () => {
     /* 
         I should use more functions, right?
     */
+    let firstStart = 0;
+    let INTERVAL = 2000;
 
     const textArea = document.querySelector("textarea");
     const viewArea = document.querySelector("#viewArea");
@@ -10,12 +12,20 @@ document.addEventListener("DOMContentLoaded", () => {
     const zoomOut = document.querySelector("#zoom-out");
 
     textArea.addEventListener("keyup", () => {
-        /*
-            We should make a timer here, so we don't refresh the file
-           every single moment... I love u P4nuch0 
+        /* Here is the delay! */
+        let date = new Date();
 
-           -P4NUCH0
-        */
+        if (firstStart === 0) {
+            firstStart = date.getTime();
+        } else {
+            console.log((date.getTime() - firstStart));
+            if ((date.getTime() - firstStart) <= INTERVAL) {
+                return;
+            } else {
+                firstStart = date.getTime();
+            }
+        }
+        /* Delay! */
 
         if (event.key === "'" || event.key === '"'){            
             const index = textArea.selectionStart;
