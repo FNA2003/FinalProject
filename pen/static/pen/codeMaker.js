@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     const INTERVAL = 1500;
 
-    const textArea = document.querySelector("textarea");
+    const textArea = document.querySelector("#code-HTML");
     const viewArea = document.querySelector("#viewArea");
 
     const zoomIn = document.querySelector("#zoom-in");
@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
             button.style.background = "#114b";
             button.style.color = "#fff";
 
-            textArea.placeholder = `Write your ${(button.id).toString().slice(7, 40)} here...`;
+            
         });
     });
 
