@@ -120,7 +120,7 @@ document.addEventListener("DOMContentLoaded", () => {
         complete(event);
 
         if (checkEmptiness() === true){
-            viewArea.value = `<span style="display:block; margin: 20px 40px;">Your changes will be displayed here</span>`;
+            viewArea.innerHTML = `<span style="display:block; margin: 20px 40px;">Your changes will be displayed here</span>`;
             return;
         }
 
