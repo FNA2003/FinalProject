@@ -34,6 +34,8 @@ class Code(models.Model):
 
 
        Variables used in this model; 
+            -userFK (stores the Foreign Key of the creator)
+
             -code_HTML (stores the html code, it can be empty and edited)
 
             -code_CSS (stores the css code, it can be empty and edited)
@@ -50,3 +52,23 @@ class Code(models.Model):
     code_JS = models.TextField(editable=True, blank=True)
 
     isPublic = models.BooleanField(editable=True, default=True)
+
+
+class Likes(models.Model): 
+    """
+        The likes models stores if the user likes certain code. This model doesn't run any validation.
+
+       The variables used in this model:
+            -codeFK (stores the Foreign Key for the code)
+
+            -likerFK (i'm sorry for the name, it stores the Foreign Key for the person who putted the like on the code)
+
+            -eliminated (strange, right? It stores the if the user take out the like for the code, so we don't need to remove the row and create a new one every time that a user doesn't decide)
+
+    
+    """
+
+    codeFK = models.ForeignKey("Code", on_delete=models.CASCADE)
+    likerFK = models.ForeignKey("User", on_delete=models.CASCADE)
+
+    eliminated = models.BooleanField(default=False, editable=True)
