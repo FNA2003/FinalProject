@@ -1,4 +1,3 @@
-import email
 from django.db import models
 from django.core.exceptions import ValidationError
 
@@ -26,5 +25,24 @@ class User(models.Model):
         if len(self.avatarURL) > 1:
             if len(self.avatarURL) > 2048 or ("http" not in self.avatarURL) or ("." not in self.avatarURL):
                 raise ValidationError
-            
 
+
+class Code(models.Model):
+    """
+        The Code model stores all of the HTML, CSS and JAVASCRIPT code of a specific user. This model has no verification
+       and, if the user is deleted, we will delete the code.
+
+
+       Variables used in this model; 
+            -code_HTML (stores the html code, it can be empty and edited)
+
+            -code_CSS (stores the css code, it can be empty and edited)
+
+            -code_JS (stores the javascript code, it can be empty and edited)
+    """
+
+    userFK = models.ForeignKey("User", on_delete=models.CASCADE)
+
+    code_HTML = models.TextField(editable=True, blank=True)
+    code_CSS = models.TextField(editable=True, blank=True)
+    code_JS = models.TextField(editable=True, blank=True)
