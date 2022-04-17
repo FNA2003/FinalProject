@@ -39,6 +39,8 @@ class Code(models.Model):
             -code_CSS (stores the css code, it can be empty and edited)
 
             -code_JS (stores the javascript code, it can be empty and edited)
+
+            -isPublic (stores if the user wants to make public his code)
     """
 
     userFK = models.ForeignKey("User", on_delete=models.CASCADE)
@@ -46,3 +48,5 @@ class Code(models.Model):
     code_HTML = models.TextField(editable=True, blank=True)
     code_CSS = models.TextField(editable=True, blank=True)
     code_JS = models.TextField(editable=True, blank=True)
+
+    isPublic = models.BooleanField(editable=True, default=True)
