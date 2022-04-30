@@ -1,0 +1,42 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'pen/layout.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet"> 
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+    <div id="nav-container">
+        <nav>
+            <ul>
+                <li id="comp-tag"><span>C{}DE!</span></li>
+                <li><a href="{% url 'index' %}">Home</a></li>
+
+                {% if user.is_authenticated %}
+                    <li><a href="#">New file</a></li>
+                    <li><a href="#">My files</a></li>
+                    <li><a href="#">Likes list</a></li>
+                    <li><a href="#">Log out</a></li>
+                    <li>Hello, <b>{{ user.username }}</b>.</li>
+        
+                {% else %}
+                    <li><a href="#">Register</a></li>
+                    <li><a href="#">Log in</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+    <div>
+        {% block body %}{% endblock %}
+    </div>
+</body>
+</html>

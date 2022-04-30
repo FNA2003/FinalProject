@@ -1,0 +1,22 @@
+{% extends "pen/layout.html" %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+<link rel="stylesheet" href="{% static 'pen/index.css' %}">
+
+<div id="body-content">
+    <div>a</div>
+    <div id="side-bar">
+        <h2>Last updates:</h2>
+        <br><br>
+        <pre>
+            <h3><strong>Update 1.0.0</strong></h3>
+            - Starting to work with the index page
+        </pre>
+    </div>
+</div>
+
+
+{% endblock %}
