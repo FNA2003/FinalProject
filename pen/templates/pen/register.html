@@ -1,0 +1,56 @@
+{% extends 'pen/layout.html' %}
+{% load static %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+
+<link rel="stylesheet" href="{% static 'pen/register.css' %}">
+
+<div>
+    <div id="background-image">
+        <img src="https://images8.alphacoders.com/559/thumb-1920-559128.jpg" alt="C-view">
+    </div>
+    <div id="form-container">
+        <div>
+            <div class="warning">Warning</div>
+            <div>
+                <h1>Register</h1>
+                <i class="fa fa-times-circle" aria-hidden="true"></i>
+            </div>
+            <div>
+                <form method="POST">
+                    <div>
+                        {% csrf_token %}
+                    </div>
+                    <div>
+                        <label for="user">Username:</label>
+                        <input maxlength="50" minlength="5" type="text" name="user" required autocomplete="off" />
+                    </div>
+                    <div>
+                        <label for="email">Email:</label>
+                        <input maxlength="320" minlength="8" type="email" name="email" required autocomplete="off" />
+                    </div>
+                    <div>
+                        <label for="password">Password:</label>
+                        <input maxlength="100" minlength="6" type="password" name="password" required autocomplete="off" />
+                    </div>
+                    <div>
+                        <label for="confirm">Confirm password:</label>
+                        <input maxlength="100" minlength="6" type="password" name="confirm" required autocomplete="off" />
+                    </div>
+                    <div>
+                        <input type="submit" value="Submit" />
+                    </div>
+
+                </form>
+            </div>
+            <div id="foot">
+                <span>Already have an account? <a href="{% url 'login' %}">Log in</a></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
