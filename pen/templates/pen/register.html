@@ -6,6 +6,7 @@
 {% block body %}
 
 <link rel="stylesheet" href="{% static 'pen/register.css' %}">
+<script src="{% static 'pen/register.js' %}"></script>
 
 <div>
     <div id="background-image">
@@ -13,7 +14,11 @@
     </div>
     <div id="form-container">
         <div>
-            <div class="warning">Warning</div>
+            <div class="warning">
+                {% if message %}
+                    {{ message }}
+                {% endif %}
+            </div>
             <div>
                 <h1>Register</h1>
                 <i class="fa fa-times-circle" aria-hidden="true"></i>
