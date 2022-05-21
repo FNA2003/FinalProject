@@ -27,7 +27,7 @@
                     <li><a href="#">New file</a></li>
                     <li><a href="#">My files</a></li>
                     <li><a href="#">Likes list</a></li>
-                    <li><a href="#">Log out</a></li>
+                    <li><a href="{% url 'logout' %}">Log out</a></li>
                     <li>Hello, <b>{{ user.username }}</b>.</li>
         
                 {% else %}

@@ -23,20 +23,24 @@ def register(request):
         if (request.POST["password"] != request.POST["confirm"]):
             return render(request, "pen/register.html", { "message":"The passwords must match" })
 
+        newUser = User(username=request.POST["user"], email=request.POST["email"], password=request.POST["password"])
 
-        newUser = User.objects.create(username=request.POST["user"], email=request.POST["email"], password=request.POST["password"])
-
-        if newUser.userValidations() == "ValidationError":
-            return render(request, "pen/register.html", { "message": "Any of the fields didn't reach the specified length" })
-
-
-        # We should be able to use the authenticate() and log in... Next step!
+        if newUser.userValidations() != True:
+            return render(request, "pen/register.html", { "message":"Any of the fields were modified" })
 
         newUser.save()
-        login(request, newUser.id)
+        login(request, newUser)
 
         return HttpResponseRedirect(reverse("index"))
 
 
 def logIn(request):
     return HttpResponse("Log In????!")
+
+
+
+@login_required(login_url="/login")
+def logOut(request):
+
+    logout(request)
+    return HttpResponseRedirect(reverse("index"))
