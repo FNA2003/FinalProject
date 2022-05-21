@@ -35,7 +35,7 @@ def register(request):
 
 
 def logIn(request):
-    return HttpResponse("Log In????!")
+    return render(request, "pen/logIn.html")
 
 
 
