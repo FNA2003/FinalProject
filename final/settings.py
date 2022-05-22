@@ -83,7 +83,10 @@ DATABASES = {
     }
 }
 
-#AUTH_USER_MODEL = "pen.User"
+
+AUTH_USER_MODEL = "pen.User"
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -126,3 +129,6 @@ STATIC_ROOT = "staticfiles"
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static")
 ]
+
+
+LOGIN_REDIRECT_URL = "/"

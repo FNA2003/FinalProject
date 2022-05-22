@@ -5,11 +5,11 @@ from django.contrib.auth.models import AbstractUser
 class User(AbstractUser): 
     def userValidations(self):
         if len(self.username) < 5 or len(self.username) > 50:
-            return "ValidationError"
+            return f"Username length incorrect! {self.username}"
         if len(self.password) < 6 or len(self.password) > 100:
-            return "ValidationError"
+            return f"Password length incorrect! {self.password}"
         if len(self.email) < 8 or len(self.email) > 320:
-            return "ValidationError"
+            return f"Email length incorrect! {self.email}"
         
         return True
 

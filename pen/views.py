@@ -1,8 +1,10 @@
+import re
 from django.http import HttpResponse
 from django.shortcuts import render, HttpResponse, HttpResponseRedirect
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
+from django.db import IntegrityError
 
 
 from .models import *
@@ -23,17 +25,21 @@ def register(request):
         if (request.POST["password"] != request.POST["confirm"]):
             return render(request, "pen/register.html", { "message":"The passwords must match" })
 
-        for i in User.objects.values_list("username"):
-            if i[0] == request.POST["user"]:
-                return render(request, "pen/register.html", { "message":"The username is taken" })  
+        try:
+            username = request.POST["user"]
+            password = request.POST["password"]
+            email = request.POST["email"]
+            user = User.objects.create_user(username, email, password)
 
-        newUser = User(username=request.POST["user"], email=request.POST["email"], password=request.POST["password"])
 
-        if newUser.userValidations() != True:
-            return render(request, "pen/register.html", { "message":"Any of the fields were modified" })
+            if user.userValidations() != True:
+                return render(request, "pen/register.html", { "message":"Any of the fields were modified" })
 
-        newUser.save()
-        login(request, newUser)
+        except IntegrityError:
+            return render(request, "pen/register.html", { "message":"The username is taken" })  
+
+
+        login(request, user)
 
         return HttpResponseRedirect(reverse("index"))
 
@@ -43,14 +49,17 @@ def logIn(request):
         return render(request, "pen/logIn.html")
     elif request.method == "POST":
         if "user" not in request.POST or "password" not in request.POST:
-            return render(request, "pen/logIn.html", {"message":"AN INPUT('S) WAS NOT PROVIDED"})
+            return render(request, "pen/logIn.html", {"message":"An input was not provided"})
 
-        password = request.POST["password"]
-        username = request.POST["user"]
-
-        user = authenticate(request, username=username, password=password)
-
-        # The user is always None, why?
+        pas = request.POST["password"]
+        ur = request.POST["user"]
+        
+        user = authenticate(username=ur, password=pas)
+        
+        if user is not None:
+            login(request, user)
+        else:
+            return render(request, "pen/logIn.html", {"message":"The user is not in the database"})
 
         return HttpResponseRedirect(reverse("index"))
 
