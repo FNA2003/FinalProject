@@ -12,15 +12,23 @@
 <div>
 
     <div>
+        {% if message %}
+        <div>
+            <span>{{ message }}</span>
+        </div>
+        {% endif %}
         <div id="formContainer">
-            <form action="">
+            <form method="POST">
+                <div>
+                    {% csrf_token %}
+                </div>
                 <div>
                     <label for="user">Username</label>
-                    <input id="user" type="text" name="user" />
+                    <input id="user" type="text" name="user" required minlength="5" maxlength="50" />
                 </div>
                 <div>
                     <label for="password">Password</label>
-                    <input id="password" type="password" name="password" />
+                    <input id="password" type="password" name="password" required minlength="6" maxlength="100" />
                 </div>
                 <div>
                     <input type="submit" />
