@@ -30,8 +30,8 @@
                     <li><a href="#" id="user-profile">Profile <i class="fa fa-user" aria-hidden="true"></i></a></li>
         
                 {% else %}
-                    <li><a class="navbar-link" href="{% url 'register' %}">Register</a></li>
-                    <li><a class="navbar-link" href="{% url 'login' %}">Log in</a></li>
+                    <li><a class="navbar-link" href="{% url 'register' %}">Register <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>
+                    <li><a class="navbar-link" href="{% url 'login' %}">Log in <i class="fa fa-sign-in" aria-hidden="true"></i></a></li>
                 {% endif %}
             </ul>
         </nav>

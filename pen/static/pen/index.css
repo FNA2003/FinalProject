@@ -1,50 +1,90 @@
-#body-content {
-    display: grid;
-    grid-template-columns: 70% 30%;
-    grid-template-areas: "a b";
+#blockImage {
+    background-repeat: no-repeat;
 
-}
-#body-content > div {
-    height: calc(94vh - 48px);
-    padding: 13px 8px;
-}
+    width: 100%;
+    height: 40vh;
 
-#body-content:first-child {
-    grid-area: "a";
-}
+    min-height: 300px;
 
-#side-bar {
-    border-left: 2px solid black;
-    grid-area: "b";
+    background-image: url("https://images2.alphacoders.com/698/698137.jpg");
 
-    background: #67a49b;
+    animation-name: showBackground;
+    animation-timing-function: ease-in;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+    animation-duration: 2.6s;
 }
 
-#side-bar pre {
-    overflow-y: auto;
-    white-space: pre-line;
-    word-wrap: break-word;
-
-    background: #38756d;
-    color: #eeef;
-
-    padding: 4px 7px;
-    margin: 2px;
-
-    height: 70vh;
-    outline: 4px inset #97d6cc;
-    border-radius: 0 30px 0 0;
+@keyframes showBackground {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
-#update-holder {
-    position: absolute;
-
-    right: 2vw;
-    bottom: 2vh;
-}
-
-#side-bar pre > h3 {
-    color: #aeaeff;
-    font-weight: 900;
+#title-holder {
+    text-align: center;
     text-decoration: underline;
+    
+    margin: 30px 0;
+}
+
+
+#projects-holder {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    
+    margin: 40px 70px;
+    
+    justify-content: space-evenly;
+    
+    text-align: center;
+}
+
+.project-holder {
+    width: 25vw;
+    height: 45vh;
+    min-width: 350px;
+    min-height: 350px;
+
+    margin: 4px 9px;
+
+    display: block;
+
+    color: black;
+    text-decoration: none;
+
+    box-shadow: 0 0 15px gray;
+    transition: box-shadow .4s;
+}
+
+.project-holder:hover {
+    box-shadow: 0 0 25px #752bff;
+}
+
+
+#goUp {
+    display: flex;
+    position: sticky;
+
+    bottom: 40px;
+    left: 94vw;
+
+    justify-content: center;
+    align-items: center;
+
+    width: 60px;
+    height: 60px;
+
+    border-radius: 20px;
+    border: 1px solid lightgray;
+
+    box-shadow: 0 0 10px lightgray;
+
+    color: black;
+    text-decoration: none;
+    font-size: larger;
 }

@@ -4,34 +4,33 @@
 {% block title %}Home{% endblock %}
 
 {% block body %}
+
 <link rel="stylesheet" href="{% static 'pen/index.css' %}">
+<script src="{% static 'pen/index.js' %}"></script>
 
 <div id="body-content">
-    <div id="code-views">
-        Here will be the iframe to view the newest projects from the users!
-    </div>
-    <div id="side-bar">
+    <div>
         <div>
-            <h2>Last updates:</h2>
-            <br><br>
-            <pre>
-                <h3>Update 1.3</h3>
-                - Added the login/logout page and fix the register page
+            <div id="blockImage"></div>
+        </div>
+        <div id="title-holder">
+            <h2>Latest Public Projects</h2>
+        </div>
+        <div id="projects-holder">
 
-                <h3>Update 1.1</h3>
-                - Added the register page
+            <a href="#" class="project-holder">
+                <img src="https://image.shutterstock.com/image-vector/home-office-work-anywhere-website-260nw-1653309571.jpg" />
+            </a>
 
-                <h3>Update 1.0.1</h3>
-                - Styling the index page
-                
-                <h3>Update 1.0.0</h3>
-                - Starting to work with the index page
-            </pre>
+            <a href="#" class="project-holder">
+                <img src="https://image.shutterstock.com/image-vector/web-ui-element-design-agency-260nw-1876993141.jpg" />
+            </a>
+        
         </div>
 
-        <div id="update-holder">
-            <span>Here you can see all of the <a href="#">updates</a>!</span>
-        </div>        
+        <a id="goUp" href="#nav-container">
+            <i class="fa fa-arrow-up" aria-hidden="true"></i>
+        </a>
     </div>
 </div>
 
