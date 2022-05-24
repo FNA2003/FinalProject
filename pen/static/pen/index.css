@@ -1,12 +1,15 @@
-#blockImage {
-    background-repeat: no-repeat;
+iframe {
+    border: none;
+}
 
+.blockImage {
     width: 100%;
     height: 40vh;
 
     min-height: 300px;
 
     background-image: url("https://images2.alphacoders.com/698/698137.jpg");
+    background-repeat: no-repeat;
 
     animation-name: showBackground;
     animation-timing-function: ease-in;
@@ -40,29 +43,34 @@
     margin: 40px 70px;
     
     justify-content: space-evenly;
-    
-    text-align: center;
 }
 
 .project-holder {
-    width: 25vw;
-    height: 45vh;
-    min-width: 350px;
-    min-height: 350px;
+    width: 26vw;
+    height: 50vh;   
 
-    margin: 4px 9px;
+    overflow: hidden;
 
-    display: block;
+    margin: 5vh 0;
 
-    color: black;
-    text-decoration: none;
-
-    box-shadow: 0 0 15px gray;
-    transition: box-shadow .4s;
+    border: 1px solid #5f5f5f;
+    border-radius: 40px 40px 0 0;
+    
+    transition: transform .6s;
 }
 
 .project-holder:hover {
-    box-shadow: 0 0 25px #752bff;
+    transform: scale(1.2); /* HUM, TAL VEZ HACE ZOOM EN LA PAGINA */
+    box-shadow: 0 0 10px gray;
+}
+
+.project-holder > div {
+    text-align: center;
+    border-bottom: 1px solid #5f5f5f;
+    background: #aaa4;
+}
+.project-holder > div span {
+    display: block;
 }
 
 
@@ -87,4 +95,33 @@
     color: black;
     text-decoration: none;
     font-size: larger;
+}
+
+
+.foot {
+    height: 10vh;
+
+    margin-top: 30px;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+
+    background: #112;
+
+    font-weight: bold;
+    color: white;
+}
+
+
+.footer-link {
+    display: block;
+
+    text-decoration: none;
+    color: white;
+
+    width: 15vw;
+    margin: 0 1vw;
 }
