@@ -4,24 +4,46 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.querySelector("#goUp").style.display = "none";
 
-    document.querySelectorAll(".projectHolder").forEach(holder => {
-        holder.addEventListener("click", () => {
-            let popUp = document.querySelector("#window");
+    document.querySelectorAll(".fullScreenSelector").forEach(container => {
+        container.addEventListener("click", () => {
+            let parent = container.parentElement;
 
-            if (state === false){
-                popUp.style.cssText = `display:block;
-                                    position: absolute;
-                                    top:  calc(9vh + ${window.scrollY}px);
-                                    left: 25vw;
-                                    width: 50vw;
-                                    height: 90vh;
-                                    background: red;`;
+            if (container.children[0].classList[1] === "fa-arrows-alt") {
+                document.querySelector("#goUp").style.display = "none";
 
-                state = true;
+                container.innerHTML = '<i class="fa fa-times" aria-hidden="true"></i>';
+
+                document.querySelector("html").style.overflowY= "hidden";
+
+                parent.style.cssText = `position: absolute;
+                                        top: calc(4vh + ${scrollY}px);
+                                        width: 75vw;
+                                        height: 90vh;
+                                        z-index: 10;`;
+
+                parent.children[1].style.cssText = `height: 75%;`;
+                parent.children[1].children[0].style.cssText = `width: 96%;
+                                                                height: 100%;
+                                                                margin: auto;`;
+
+                parent.children[1].children[0].scrolling = "yes"
+
+                parent.children[2].style.cssText = `width: 97.5%;
+                                                    height: 17%;
+                                                    border: 1px solid gray;`;
             } else {
-                popUp.style.cssText = `display: none;`;
-                state = false;
+
+                container.innerHTML = '<i class="fa fa-arrows-alt" aria-hidden="true"></i>';
+
+                document.querySelector("html").style.overflowY= "auto";
+
+                parent.children[1].children[0].scrolling = "no"
+
+                parent.style.cssText = `position: static;`;
+
+                /* We need to leave the element as it was */
             }
+            
         });
     });
 });

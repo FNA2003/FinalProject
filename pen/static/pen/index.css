@@ -1,7 +1,3 @@
-iframe {
-    border: none;
-}
-
 .blockImage {
     width: 100%;
     height: 40vh;
@@ -50,25 +46,26 @@ iframe {
     
     background: #37474f;
     
-    display: block;
-    
-}
-.projectHolder:hover {
-    cursor: pointer;
-    box-shadow: 0 0 20px gray;
+    display: block;    
 }
 
-.projectHolder div img {
+.projectHolder > div:nth-child(2) {
+    text-align: center;
+}
+
+.projectHolder div iframe {
     width: 405px;
     height: 212px;
 
-    display: block;
+    background: #fff;
+    border: none;
+
     margin: 15px auto;
 }
 
 
-.projectHolder > div:nth-child(2) {
-    height: 205px;
+.projectHolder > div:nth-child(3) {
+    height: 110px;
     width: 445px;
 
     padding: 20px 17px;
@@ -77,8 +74,17 @@ iframe {
     border-top: 1px solid gray;
 
 }
-.projectHolder > div:nth-child(2) > div {
+.projectHolder > div:nth-child(3) > div {
     margin: 20px 0;
+}
+.projectHolder > div:first-child {
+    text-align: right;
+    padding: 0 10px;
+}
+
+.projectHolder > div:first-child i:hover {
+    cursor: pointer;
+    box-shadow: 0 0 10px gray;
 }
 
 #goUp {
