@@ -43,4 +43,18 @@ document.addEventListener("scroll", () => {
     } else {
         document.querySelector("#goUp").style.display = "none";
     }
+
+
+    if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 100)) {
+        
+        /*
+
+        WE REACHED THE END OF THE PAGE, WE SHOULD BE ABLE TO REQUEST MORE POSTS
+        
+        */
+
+
+
+
+    }
 });
