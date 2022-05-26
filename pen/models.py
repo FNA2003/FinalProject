@@ -16,7 +16,9 @@ class User(AbstractUser):
 
 class Code(models.Model):
     userFK = models.ForeignKey("User", on_delete=models.CASCADE, related_name="coder_FK")
+
     projectName = models.CharField(max_length=36, editable=True, blank=False)
+    likesCount = models.IntegerField(default=0, editable=True, blank=False)
 
     code_HTML = models.TextField(editable=True, blank=True)
     code_CSS = models.TextField(editable=True, blank=True)

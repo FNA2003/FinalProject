@@ -70,3 +70,25 @@ def logOut(request):
 
     logout(request)
     return HttpResponseRedirect(reverse("index"))
+
+@login_required(login_url="/login")
+def profile(request):
+    files = Code.objects.all().filter(userFK=request.user)
+    likes = len(Likes.objects.all().filter(likerFK=request.user).filter(eliminated=False))
+
+    return render(request, "pen/profile.html", {
+        "filesArr":files,
+        "likesNumber":likes
+    })
+
+
+
+
+@login_required(login_url="/login")
+def likesList(request):
+    return HttpResponse("likes list")
+
+
+@login_required(login_url="/login")
+def files(request):
+    return HttpResponse("files")

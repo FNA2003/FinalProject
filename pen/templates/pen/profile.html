@@ -1,0 +1,50 @@
+{% extends "pen/layout.html" %}
+{% load static %}
+
+
+
+{% block title %}Profile{% endblock %}
+
+{% block body %}
+<link rel="stylesheet" href="{% static  'pen/profile.css' %}">
+
+<div id="mainHolder">
+    <div>
+        <div id="firstBlock">
+            <div> <img src="https://icons.veryicon.com/png/o/miscellaneous/two-color-icon-library/user-286.png" /> </div>
+            <div>
+                <h3>{{ user.username }}</h3>
+                <h5>{{ user.email }}</h5>
+            </div>
+        </div>
+        <div id="secondBlock">
+            <div>
+                {% if filesArr %}
+                    {% for i in filesArr %}
+                    <div class="projectHold">
+                        <span>{{ i.projectName }}</span>
+                        <div></div><div></div>
+                        <span><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> {{ i.likesCount }}</span>
+                    </div>
+                    {% endfor %}    
+        
+                    <br><span>See all of your <a href="{% url 'files' %}">files</a></span>
+                {% else %}
+                    <span>You don't have any file, <a href="{% url 'files' %}">make one</a></span>
+                {% endif %}
+            </div>
+
+            <br><hr><br>
+            
+            <div>
+                <div style="margin-top: 10px;">
+                    <span>You liked <strong>{{ likesNumber }}</strong> post(s)</span>
+                </div>
+
+                <br><span>See your <a href="{% url 'likes' %}">likes list</a></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
