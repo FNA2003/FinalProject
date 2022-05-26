@@ -1,5 +1,5 @@
-document.addEventListener("DOMContentLoaded", () => {    
-    let state = false;
+document.addEventListener("DOMContentLoaded", () => {
+    let lastScroll = null;
     scroll(0,0);
 
     document.querySelector("#goUp").style.display = "none";
@@ -9,39 +9,28 @@ document.addEventListener("DOMContentLoaded", () => {
             let parent = container.parentElement;
 
             if (container.children[0].classList[1] === "fa-arrows-alt") {
-                document.querySelector("#goUp").style.display = "none";
+                lastScroll = window.scrollY;
 
                 container.innerHTML = '<i class="fa fa-times" aria-hidden="true"></i>';
 
                 document.querySelector("html").style.overflowY= "hidden";
-
-                parent.style.cssText = `position: absolute;
-                                        top: calc(4vh + ${scrollY}px);
-                                        width: 75vw;
-                                        height: 90vh;
-                                        z-index: 10;`;
-
-                parent.children[1].style.cssText = `height: 75%;`;
-                parent.children[1].children[0].style.cssText = `width: 96%;
-                                                                height: 100%;
-                                                                margin: auto;`;
+                document.querySelector("#goUp").style.display = "none";
 
                 parent.children[1].children[0].scrolling = "yes"
+                
+                scroll(0,0);
 
-                parent.children[2].style.cssText = `width: 97.5%;
-                                                    height: 17%;
-                                                    border: 1px solid gray;`;
+                parent.style.animationName = "fullScreen";
+                parent.style.animationPlayState  = "running";
             } else {
+                scroll(0, lastScroll);
 
                 container.innerHTML = '<i class="fa fa-arrows-alt" aria-hidden="true"></i>';
 
                 document.querySelector("html").style.overflowY= "auto";
-
-                parent.children[1].children[0].scrolling = "no"
-
-                parent.style.cssText = `position: static;`;
-
-                /* We need to leave the element as it was */
+                parent.children[1].children[0].scrolling = "no";
+                
+                parent.style.animationName = "none";
             }
             
         });

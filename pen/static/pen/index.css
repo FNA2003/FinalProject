@@ -39,52 +39,69 @@
 }
 
 .projectHolder {
-    margin: 27px 23px;
-    
-    color: #fff;
-    text-decoration: none;
-    
+    display: grid;
+    grid-template-rows: 5% 75% 20%;
+    grid-template-columns: auto;
+
+
+    border-radius: 15px;
+
+    width: 450px;
+    height: 500px;
+
     background: #37474f;
-    
-    display: block;    
+
+    animation-name: fullScreen;
+    animation-duration: .4s;
+    animation-fill-mode: forwards;
+    animation-play-state: paused;
+}
+@keyframes fullScreen {
+    from {
+        position: inherit;
+        width: 450px;
+        height: 500px;
+    }   
+    to {
+        position: absolute;
+        top: 0;
+        width: 75vw;
+        height: 80vh;
+        min-width: 650px;
+        min-height: 500px;
+    }
+}
+
+.projectHolder > div:first-child {
+    text-align: right;
+    padding: 0 8px;
 }
 
 .projectHolder > div:nth-child(2) {
     text-align: center;
 }
 
-.projectHolder div iframe {
-    width: 405px;
-    height: 212px;
-
-    background: #fff;
-    border: none;
-
-    margin: 15px auto;
-}
-
-
 .projectHolder > div:nth-child(3) {
-    height: 110px;
-    width: 445px;
-
-    padding: 20px 17px;
-
     background: #102027;
-    border-top: 1px solid gray;
-
-}
-.projectHolder > div:nth-child(3) > div {
-    margin: 20px 0;
-}
-.projectHolder > div:first-child {
-    text-align: right;
-    padding: 0 10px;
+    color: #fff;
+    padding: 15px 8px;
 }
 
-.projectHolder > div:first-child i:hover {
-    cursor: pointer;
-    box-shadow: 0 0 10px gray;
+.projectHolder > div iframe {
+    width: 96%;
+    height: 96%;
+
+    border: none;
+    background: #fff;
+}
+
+.projectHolder__Info span{
+    display: block;
+    text-align: center;
+}
+
+.projectHolder__Info span a {
+    color: aquamarine;
 }
 
 #goUp {
