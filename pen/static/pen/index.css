@@ -132,6 +132,7 @@
 
 .foot {
     height: 10vh;
+    min-height: 90px;
 
     padding-top: 30px;
 

@@ -9,9 +9,19 @@ from django.db import IntegrityError
 
 from .models import *
 
-# Create your views here.
+
 def index(request):
-    return render(request, "pen/index.html")
+    codeArr = Code.objects.all().order_by("id")[::-1][:10]
+    try:
+        lastId = codeArr[-1].id
+    except IndexError:
+        lastId = 0
+
+    return render(request, "pen/index.html", {
+        "array":codeArr,
+        "last":lastId
+    })
+    # TODO: MAKE WORK THE 'last' KEY, AND THE API
 
 
 def register(request):

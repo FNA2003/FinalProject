@@ -18,65 +18,42 @@
             <div>
                 <div>
 
-                    <div class="projectHolder">
-                        <div class="fullScreenSelector">
-                            <i class="fa fa-arrows-alt" aria-hidden="true"></i>
-                        </div>
-                        <div>
-                            <iframe scrolling="no" src="http://www.columbia.edu/~fdc/sample.html"></iframe>
-                        </div>
-                        <div class="projectHolder__Info">
-                            <span><a href="#">Here</a> you can see the full page!</span>
-                            <div>
-                                <h3>Name</h3>
+                    {% if array %}
+                        {% for i in array %}
+                        <div class="projectHolder">
+                            <div class="fullScreenSelector">
+                                <i class="fa fa-arrows-alt" aria-hidden="true"></i>
                             </div>
                             <div>
-                                <h4>Creator</h4>
+                                <iframe scrolling="no" src="{{ i.projectURL }}"></iframe>
+                            </div>
+                            <div class="projectHolder__Info">
+                                <span><a href="{{ i.projectURL }}">Here</a> you can see the full page!</span>
+                                <div>
+                                    <h3>{{ i.projectName }}</h3>
+                                </div>
+                                <div>
+                                    <h4>{{ i.userFK.username }}</h4>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="projectHolder">
-                        <div class="fullScreenSelector">
-                            <i class="fa fa-arrows-alt" aria-hidden="true"></i>
+                        {% endfor %}
+
+                    {% else %}
+                        <div style="height: 35vh; color: white;">
+                            <span>Ops... It seems like there is no projects, <a href="{% url 'files' %}" style="color:aqua">make one</a> !</span>
                         </div>
-                        <div>
-                            <iframe scrolling="no" src="http://www.columbia.edu/~fdc/sample.html"></iframe>
-                        </div>
-                        <div class="projectHolder__Info">
-                            <span><a href="#">Here</a> you can see the full page!</span>
-                            <div>
-                                <h3>Name</h3>
-                            </div>
-                            <div>
-                                <h4>Creator</h4>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="projectHolder">
-                        <div class="fullScreenSelector">
-                            <i class="fa fa-arrows-alt" aria-hidden="true"></i>
-                        </div>
-                        <div>
-                            <iframe scrolling="no" src="http://www.columbia.edu/~fdc/sample.html"></iframe>
-                        </div>
-                        <div class="projectHolder__Info">
-                            <span><a href="#">Here</a> you can see the full page!</span>
-                            <div>
-                                <h3>Name</h3>
-                            </div>
-                            <div>
-                                <h4>Creator</h4>
-                            </div>
-                        </div>
-                    </div>
+                    {% endif %}
 
                 </div>
             </div>
         </div>
-
+        
+        {% if array %}
         <a id="goUp" href="#nav-container">
             <i class="fa fa-arrow-up" aria-hidden="true"></i>
         </a>
+        {% endif %}
 
         <div>
             <footer>
