@@ -43,7 +43,6 @@
     grid-template-rows: 5% 75% 20%;
     grid-template-columns: auto;
 
-
     border-radius: 15px;
 
     width: 450px;
@@ -77,9 +76,7 @@
     padding: 0 8px;
 }
 
-.projectHolder > div:nth-child(2) {
-    text-align: center;
-}
+.projectHolder > div:nth-child(2) { text-align: center; }
 
 .projectHolder > div:nth-child(3) {
     background: #102027;
@@ -102,6 +99,10 @@
 
 .projectHolder__Info span a {
     color: aquamarine;
+}
+
+.fullScreenSelector i:hover {
+    cursor: pointer;
 }
 
 #goUp {
