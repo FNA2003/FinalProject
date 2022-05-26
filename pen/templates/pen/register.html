@@ -6,54 +6,52 @@
 {% block body %}
 
 <link rel="stylesheet" href="{% static 'pen/register.css' %}">
-<script src="{% static 'pen/register.js' %}"></script>
 
 <div>
-    <div id="background-image">
-        <img src="https://images8.alphacoders.com/559/thumb-1920-559128.jpg" alt="C-view">
-    </div>
-    <div id="form-container">
-        <div>
-            <div class="warning">
-                {% if message %}
-                    {{ message }}
-                {% endif %}
-            </div>
-            <div>
-                <h1>Register</h1>
-                <i class="fa fa-times-circle" aria-hidden="true"></i>
-            </div>
-            <div>
-                <form method="POST">
-                    <div>
-                        {% csrf_token %}
-                    </div>
-                    <div>
-                        <label for="user">Username:</label>
-                        <input maxlength="36" minlength="5" type="text" name="user" required autocomplete="off" />
-                    </div>
-                    <div>
-                        <label for="email">Email:</label>
-                        <input maxlength="320" minlength="8" type="email" name="email" required autocomplete="off" />
-                    </div>
-                    <div>
-                        <label for="password">Password:</label>
-                        <input maxlength="100" minlength="6" type="password" name="password" required autocomplete="off" />
-                    </div>
-                    <div>
-                        <label for="confirm">Confirm password:</label>
-                        <input maxlength="100" minlength="6" type="password" name="confirm" required autocomplete="off" />
-                    </div>
-                    <div>
-                        <input type="submit" value="Submit" />
-                    </div>
-
-                </form>
-            </div>
-            <div id="foot">
-                <span>Already have an account? <a href="{% url 'login' %}">Log in</a></span>
-            </div>
+    {% if message %}
+        <div id="messageContainer">
+            <span>{{ message }}</span>
         </div>
+    {% endif %}
+
+    <div id="formContainer">
+        <form method="post">
+            <div> {% csrf_token %} </div>
+            <div class="formDivider"> 
+                <div class="form-iconHolder"> <i class="fa fa-envelope" aria-hidden="true"></i> </div>
+
+                <div class="form-inputHolder"> 
+                    <div> <label for="">Provide your email</label> </div>
+                    <div> <input class="form-inputWrite" type="email" name="email" maxlength="320" minlength="8" autocomplete="off" required /> </div>
+                </div>
+            </div>
+            <div class="formDivider">
+                <div class="form-iconHolder"> <i class="fa fa-user-o" aria-hidden="true"></i> </div>
+                 
+                <div class="form-inputHolder"> 
+                    <div> <label for="">Provide your username</label> </div>
+                    <div> <input class="form-inputWrite" type="text" name="user" maxlength="36" minlength="5" autocomplete="off" required /> </div>
+                </div>
+            </div>            
+            <div class="formDivider"> 
+                <div class="form-iconHolder"> <i class="fa fa-key" aria-hidden="true"></i> </div>
+                 
+                <div class="form-inputHolder"> 
+                    <div> <label for="">Provide your password</label> </div>
+                    <div> <input class="form-inputWrite" type="password" name="password" maxlength="100" minlength="6" autocomplete="off" required /> </div>
+                </div>
+            </div>
+            <div class="formDivider"> 
+                <div class="form-iconHolder"> <i class="fa fa-keyboard-o" aria-hidden="true"></i> </div>
+                 
+                <div class="form-inputHolder"> 
+                    <div> <label for="">Repeat your password</label> </div>
+                    <div> <input class="form-inputWrite" type="password" name="confirm" maxlength="100" minlength="6" autocomplete="off" required /> </div>
+                </div>
+            </div>
+
+            <div class="formSubmit"> <input type="submit" value="Register"> </div>
+        </form>
     </div>
 </div>
 

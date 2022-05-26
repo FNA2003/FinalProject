@@ -59,7 +59,7 @@ def logIn(request):
         if user is not None:
             login(request, user)
         else:
-            return render(request, "pen/logIn.html", {"message":"The user is not in the database"})
+            return render(request, "pen/logIn.html", {"message":"The username and/or the password are incorrect"})
 
         return HttpResponseRedirect(reverse("index"))
 

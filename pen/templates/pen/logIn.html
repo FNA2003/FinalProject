@@ -1,45 +1,45 @@
-{% extends "pen/layout.html" %}
+{% extends 'pen/layout.html' %}
 {% load static %}
 
-{% block title %}Log In{% endblock %}
+{% block title %}Log in{% endblock %}
 
 {% block body %}
 
-
+<link rel="stylesheet" href="{% static 'pen/register.css' %}">
 <link rel="stylesheet" href="{% static 'pen/logIn.css' %}">
-<script src="{% static 'pen/logIn.js' %}"></script>
 
 <div>
-
-    <div>
-        {% if message %}
-        <div id="message-holder">
+    {% if message %}
+        <div id="messageContainer">
             <span>{{ message }}</span>
         </div>
-        {% endif %}
-        <div id="formContainer">
-            <form method="POST">
-                <div>
-                    {% csrf_token %}
+    {% endif %}
+
+    <div id="formContainer">
+        <form method="post">
+            <div> {% csrf_token %} </div>
+    
+            <div class="formDivider">
+                <div class="form-iconHolder"> <i class="fa fa-user-o" aria-hidden="true"></i> </div>
+                 
+                <div class="form-inputHolder"> 
+                    <div> <label for="">Provide your username</label> </div>
+                    <div> <input class="form-inputWrite" type="text" name="user" maxlength="36" minlength="5" autocomplete="off" required /> </div>
                 </div>
-                <div>
-                    <label for="user">Username</label>
-                    <input id="user" type="text" name="user" required minlength="5" maxlength="36" />
+            </div>            
+            <div class="formDivider"> 
+                <div class="form-iconHolder"> <i class="fa fa-key" aria-hidden="true"></i> </div>
+                 
+                <div class="form-inputHolder"> 
+                    <div> <label for="">Provide your password</label> </div>
+                    <div> <input class="form-inputWrite" type="password" name="password" maxlength="100" minlength="6" autocomplete="off" required /> </div>
                 </div>
-                <div>
-                    <label for="password">Password</label>
-                    <input id="password" type="password" name="password" required minlength="6" maxlength="100" />
-                </div>
-                <div>
-                    <input type="submit" />
-                </div>
-            </form>
-        </div>
+            </div>
+
+            <div class="formSubmit"> <input type="submit" value="Log in"> </div>
+        </form>
     </div>
-
-
 </div>
-
 
 
 {% endblock %}
