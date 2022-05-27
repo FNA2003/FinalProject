@@ -1,0 +1,35 @@
+#mainHolder > div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#filesHolder {
+    width: 80%;
+    height: 81vh;
+
+    padding: 5vh 2vw;
+}
+
+#filesHolder > div:first-child {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 10vh;
+
+    background: #fff;
+
+    border: 1px solid gray;
+    border-radius: 40px 40px 0 0;
+
+    padding: 20px 10px;
+}
+
+#filesHolder > div:nth-child(2) {
+    border: 1px solid gray;
+    border-radius: 0 0 40px 40px;
+
+    background: #fff;
+
+    padding: 40px 10px;
+    margin-top: 50px;
+}

@@ -1,0 +1,24 @@
+{% extends "pen/layout.html" %}
+{% load static %}
+
+{% block title %}Files{% endblock %}
+
+{% block body %}
+
+<link rel="stylesheet" href="{% static 'pen/files.css' %}">
+
+<div id="mainHolder">
+    <div>
+        <div id="filesHolder">
+            <div>
+                <h1>Files</h1>
+                <button>New file</button>
+            </div>
+            <div>
+                <iframe src="http://www.columbia.edu/~fdc/sample.html" frameborder="1" scrolling="no"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

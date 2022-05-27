@@ -9,6 +9,8 @@ from django.db import IntegrityError
 
 from .models import *
 
+    # TODO: MAKE WORK THE 'last' KEY, AND THE API
+    # TODO: MAKE WORK THE PROJECT URL
 
 def index(request):
     codeArr = Code.objects.all().order_by("id")[::-1][:10]
@@ -21,8 +23,6 @@ def index(request):
         "array":codeArr,
         "last":lastId
     })
-    # TODO: MAKE WORK THE 'last' KEY, AND THE API
-
 
 def register(request):
     if request.method == "GET":
@@ -92,13 +92,15 @@ def profile(request):
     })
 
 
+@login_required(login_url="/login")
+def files(request):
+    if (request.method == "GET"):
+        return render(request, "pen/files.html")
+
+
+    return HttpResponse("files")
 
 
 @login_required(login_url="/login")
 def likesList(request):
     return HttpResponse("likes list")
-
-
-@login_required(login_url="/login")
-def files(request):
-    return HttpResponse("files")
