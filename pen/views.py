@@ -1,4 +1,3 @@
-import re
 from django.http import HttpResponse
 from django.shortcuts import render, HttpResponse, HttpResponseRedirect
 from django.contrib.auth import login, logout, authenticate
@@ -9,11 +8,12 @@ from django.db import IntegrityError
 
 from .models import *
 
-    # TODO: MAKE WORK THE 'last' KEY, AND THE API
-    # TODO: MAKE WORK THE PROJECT URL
+# TODO: MAKE WORK THE 'last' KEY, AND THE API
+# TODO: MAKE WORK THE PROJECT URL
+# TODO: IFRAME SRC TO THE FILES
 
 def index(request):
-    codeArr = Code.objects.all().order_by("id")[::-1][:10]
+    codeArr = Code.objects.all().filter(isPublic=True).order_by("id")[::-1][:10]
     try:
         lastId = codeArr[-1].id
     except IndexError:
@@ -94,13 +94,47 @@ def profile(request):
 
 @login_required(login_url="/login")
 def files(request):
+    array = Code.objects.all().filter(userFK=request.user)
     if (request.method == "GET"):
-        return render(request, "pen/files.html")
+        return render(request, "pen/files.html", {
+            "projectsArray":array
+        })
+
+    elif (request.method == "POST"):
+        if ("fileName" not in request.POST):
+            return render(request, "pen/files.html", { 
+                "projectsArray":array,
+                "message":"You have to provide the file name" 
+            })
+        
+        name = request.POST["fileName"]    
+        public = "isPublic" in request.POST
+        
+        if ((len(name) < 4) or (len(name) > 36)):
+            return render(request, "pen/files.html", { 
+                "projectsArray":array,
+                "message":"Wrong file name length" 
+            })
+
+        if (len(Code.objects.all().filter(userFK=request.user).filter(projectName=name)) == 0):
+            try:
+                newFile = Code(userFK=request.user, projectName=name, isPublic=public)
+                newFile.save()
+            except IntegrityError:
+                return render(request, "pen/files.html", { 
+                    "projectsArray":array,
+                    "message":"There was an unexpected error" 
+                })
 
 
-    return HttpResponse("files")
-
-
+            return HttpResponseRedirect(reverse("files"))
+        else:
+            return render(request, "pen/files.html", { 
+                "projectsArray":array,
+                "message":"You have another file with the same name!" 
+            })
+        
+        
 @login_required(login_url="/login")
 def likesList(request):
     return HttpResponse("likes list")

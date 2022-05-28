@@ -20,9 +20,9 @@ class Code(models.Model):
     projectName = models.CharField(max_length=36, editable=True, blank=False)
     likesCount = models.IntegerField(default=0, editable=True, blank=False)
 
-    code_HTML = models.TextField(editable=True, blank=True)
-    code_CSS = models.TextField(editable=True, blank=True)
-    code_JS = models.TextField(editable=True, blank=True)
+    code_HTML = models.TextField(editable=True, blank=True, default="")
+    code_CSS = models.TextField(editable=True, blank=True, default="")
+    code_JS = models.TextField(editable=True, blank=True, default="")
 
     isPublic = models.BooleanField(editable=True, default=True)
 

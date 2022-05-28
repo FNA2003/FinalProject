@@ -6,17 +6,53 @@
 {% block body %}
 
 <link rel="stylesheet" href="{% static 'pen/files.css' %}">
+<script src="{% static 'pen/files.js' %}"></script>
 
 <div id="mainHolder">
     <div>
+        {% if message %}
+        <div id="messageHolder">
+            <div> <span>{{ message }}</span> </div>
+        </div>
+        {% endif %}
         <div id="filesHolder">
-            <div>
-                <h1>Files</h1>
+            <div id="newFile-Holder">
                 <button>New file</button>
             </div>
             <div>
-                <iframe src="http://www.columbia.edu/~fdc/sample.html" frameborder="1" scrolling="no"></iframe>
+                {% if projectsArray %}
+                    {% for i in projectsArray %}
+                    
+                    <div class="projectHolder">
+                        <iframe src="#" frameborder="0" scrolling="no"></iframe>
+                    
+                        <h3>{{ i.projectName }}</h3>
+                        <div class="icons"> 
+                            <a href="#"><i class="fa fa-external-link" aria-hidden="true"></i></a>
+                            <i class="fa fa-pencil" aria-hidden="true"></i> 
+                            <i class="fa fa-trash-o" aria-hidden="true"></i>
+                        </div>
+                    </div>
+
+                    {% endfor %}
+                {% else %}
+                    <div style="margin: 20px 10px;">You don't have any file right now</div>
+                {% endif %}
             </div>
+        </div>
+        <div id="formHolder">
+            <form method="post">
+                <div class="formDivider"> {% csrf_token %} </div>
+                <div class="formDivider">
+                    <div> <label for="form-fileName">File Name:</label> </div>
+                    <div> <input type="text" name="fileName" id="form-fileName" maxlength="36" minlength="4" autocomplete="off" required /> </div>
+                </div>
+                <div class="formDivider">
+                    <div> <label for="form-isPublic">You want the project to be public?</label> </div>
+                    <div> <input type="checkbox" name="isPublic" id="form-isPublic" checked  /> </div>
+                </div class="formDivider">
+                <div> <input type="submit" value="Create" /> </div>
+            </form>
         </div>
     </div>
 </div>

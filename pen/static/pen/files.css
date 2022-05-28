@@ -1,35 +1,138 @@
 #mainHolder > div{
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
 #filesHolder {
     width: 80%;
-    height: 81vh;
-
-    padding: 5vh 2vw;
+    margin: 5vh 2vw;
 }
 
-#filesHolder > div:first-child {
-    display: grid;
-    grid-template-columns: 50% 50%;
-    grid-template-rows: 10vh;
+#newFile-Holder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-    background: #fff;
+    position: fixed;
+    top: calc(13vh + 1px);
+    right: 10px;
 
-    border: 1px solid gray;
-    border-radius: 40px 40px 0 0;
+    background: transparent;
+    border: none;
 
-    padding: 20px 10px;
+    width: 160px;
+    height: 50px;
+
 }
+#newFile-Holder button {
+    width: 100%;
+    height: 100%;
+}
+
+#newFile-Holder button:hover { cursor: pointer; }
 
 #filesHolder > div:nth-child(2) {
     border: 1px solid gray;
-    border-radius: 0 0 40px 40px;
-
     background: #fff;
+}
 
-    padding: 40px 10px;
-    margin-top: 50px;
+.projectHolder {
+    display: grid;
+    grid-template-columns: 40% 58% 2%;
+    grid-template-areas: auto;
+
+    margin: 40px 15px;
+    padding: 10px 6px;
+    background: #858a94a9;
+}
+
+.projectHolder iframe { 
+    background: #fff; 
+    border: 1px solid black;
+    margin: auto;
+    width: 90%;
+    height: 100%;
+}
+
+.projectHolder h4 {
+    overflow: hidden;
+    text-overflow: clip;
+}
+
+.fa-pencil:hover{
+    cursor: pointer;
+    color: #fff;
+}
+
+.fa-trash-o:hover {
+    cursor: pointer;
+    color: #c92f2f;
+}
+
+.projectHolder a{ color: black; }
+
+.projectHolder a:hover { color: #0303f3; }
+
+.icons {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+    position: relative;
+    bottom: 10%;
+
+}
+
+#formHolder {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    position: fixed;
+    top: 40vh;
+
+    width: 350px;
+    height: 200px;   
+
+    background: #27275a;
+    color: #fff;
+    border: 1px solid gray;
+    border-radius: 10px;
+
+    animation-name: appearForm;
+    animation-duration: .7s;
+    animation-fill-mode: forwards;
+    animation-timing-function: linear;
+}
+
+.formDivider { margin: 14px 0; }
+
+#formHolder input[type="submit"], #formHolder input[type="text"] {
+    width: 100%;
+}
+
+#formHolder input[type="submit"]:hover { cursor: pointer; }
+
+@keyframes appearForm {
+    from { height: 0; overflow: hidden; }
+    to { height: 240px; overflow: hidden; }
+}
+
+#messageHolder {
+    position: relative;
+    top: 20px;
+
+    border: 1px solid red;
+    border-radius: 8px;
+    box-shadow: 0 0 10px red;
+
+    text-align: center;
+
+    width: 80%;
+
+    background: #ef5350;
+    color: #fff;
 }
