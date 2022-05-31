@@ -25,12 +25,17 @@
                     
                     <div class="projectHolder">
                         <iframe src="#" frameborder="0" scrolling="no"></iframe>
-                    
+                        <input type="hidden" value="{{ i.id }}" />
                         <h3>{{ i.projectName }}</h3>
                         <div class="icons"> 
                             <a href="#"><i class="fa fa-external-link" aria-hidden="true"></i></a>
                             <i class="fa fa-pencil" aria-hidden="true"></i> 
                             <i class="fa fa-trash-o" aria-hidden="true"></i>
+                            {% if i.isPublic == False %}
+                            <i class="fa fa-eye-slash" aria-hidden="true"></i>
+                            {% else %}
+                            <i class="fa fa-eye" aria-hidden="true"></i>
+                            {% endif %}
                         </div>
                     </div>
 
@@ -42,7 +47,7 @@
         </div>
         <div id="formHolder">
             <form method="post">
-                <div class="formDivider"> {% csrf_token %} </div>
+                <div class="formDivider" id="csrfHolder"> {% csrf_token %} </div>
                 <div class="formDivider">
                     <div> <label for="form-fileName">File Name:</label> </div>
                     <div> <input type="text" name="fileName" id="form-fileName" maxlength="36" minlength="4" autocomplete="off" required /> </div>

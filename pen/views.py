@@ -1,16 +1,18 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, HttpResponse, HttpResponseRedirect
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.db import IntegrityError
-
+import json
 
 from .models import *
 
 # TODO: MAKE WORK THE 'last' KEY, AND THE API
 # TODO: MAKE WORK THE PROJECT URL
 # TODO: IFRAME SRC TO THE FILES
+
+# TODO: IN THE FILES URL, MAYBE, WE DON'T NEED TO RELOAD THE PAGE... AND, THE NEW FILE NAME SHOULD BE REFRESH
 
 def index(request):
     codeArr = Code.objects.all().filter(isPublic=True).order_by("id")[::-1][:10]
@@ -134,7 +136,42 @@ def files(request):
                 "message":"You have another file with the same name!" 
             })
         
-        
+@login_required(login_url="/login")
+def editFile(request):
+    if (request.method == "UPDATE"):
+        jsonObject = json.loads(request.body.decode("UTF-8"))
+
+        if ("edit" in jsonObject):
+            try:
+                hlp = Code.objects.all().filter(pk=jsonObject["fileID"]).filter(userFK=request.user)
+                hlp = hlp[0]
+                hlp.isPublic = (jsonObject["value"] == 1)
+                hlp.save()
+            except(KeyError, IndexError):
+                return JsonResponse({"ERR":"NOT MODIFIED"},status=304)
+
+        else:
+            try:
+                hlp = Code.objects.all().filter(pk=jsonObject["fileID"]).filter(userFK=request.user)
+                hlp = hlp[0]
+                hlp.projectName = jsonObject["newFileName"]
+                hlp.save()
+            except (KeyError, IndexError):
+                return JsonResponse({"ERR":"NOT MODIFIED"},status=304)
+
+        return JsonResponse({"OK":"MODIFIED"},status=200)
+
+    elif (request.method == "DELETE"):
+        jsonObject = json.loads(request.body.decode("UTF-8"))
+        try:
+            hlp = Code.objects.all().filter(pk=jsonObject["fileID"]).filter(userFK=request.user)
+            hlp = hlp[0]
+            hlp.delete()
+        except (KeyError, IndexError):
+            return JsonResponse({"ERR":"NOT MODIFIED"},status=304)
+
+        return JsonResponse({"OK":"MODIFIED"}, status=200)
+
 @login_required(login_url="/login")
 def likesList(request):
     return HttpResponse("likes list")

@@ -50,6 +50,8 @@
     grid-template-columns: 80% 20%;
     grid-template-rows: 54px 54px;
     padding: 0 10px;
+    margin: 10px 0;
+    background: #bbd2fe;
 }
 
 #secondBlock span a { color: #4882f6; }

@@ -71,6 +71,11 @@
     color: #c92f2f;
 }
 
+.fa-eye-slash:hover, .fa-eye:hover {
+    color: yellow;
+    cursor: pointer;
+}
+
 .projectHolder a{ color: black; }
 
 .projectHolder a:hover { color: #0303f3; }
@@ -79,10 +84,6 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-
-    position: relative;
-    bottom: 10%;
-
 }
 
 #formHolder {

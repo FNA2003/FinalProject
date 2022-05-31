@@ -10,4 +10,8 @@ urlpatterns = [
     path("profile", views.profile, name="profile"),
     path("likes", views.likesList, name="likes"),
     path("files", views.files, name="files"),
+
+
+    # API
+    path("editFile", views.editFile, name="editFile"),
 ]
