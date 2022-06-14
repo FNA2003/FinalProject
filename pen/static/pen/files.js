@@ -22,30 +22,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 
-    document.querySelectorAll(".fa-pencil").forEach(button => {
-
-        button.addEventListener("click", () => {
-            const parent = button.parentElement.parentElement;            
-
-            /* TODO: NEW FILE NAME */
-            fetch("/editFile", {
-                body: JSON.stringify({
-                    "fileID":(parent.children[1].value),
-                    "newFileName":"Ok"
-                }),
-                method:"UPDATE",
-                headers: {
-                    "Content-type":"application/json; charset=UTF-8",
-                    "X-CSRFToken":csrf
-                }
-            })
-                .then(response =>  { console.log(response); location.reload(); } )
-                .catch(error => { console.log(error); });
-        });
-
-
-    });
-
     document.querySelectorAll(".fa-trash-o").forEach(button => {
 
         button.addEventListener("click", () => {
@@ -80,7 +56,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     "X-CSRFToken":csrf                    
                 }, 
                 body: JSON.stringify({
-                    "edit":"isPublic",
                     "value": 1,
                     "fileID": id
                 }),
@@ -101,7 +76,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     "X-CSRFToken":csrf                    
                 }, 
                 body: JSON.stringify({
-                    "edit":"isPublic",
                     "value": 0,
                     "fileID": id
                 }),

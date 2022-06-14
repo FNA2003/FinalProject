@@ -61,11 +61,6 @@
     text-overflow: clip;
 }
 
-.fa-pencil:hover{
-    cursor: pointer;
-    color: #fff;
-}
-
 .fa-trash-o:hover {
     cursor: pointer;
     color: #c92f2f;
@@ -136,4 +131,38 @@
 
     background: #ef5350;
     color: #fff;
+}
+
+#nameChange-holder {    
+    position: absolute;
+    top: 25vh;
+
+    width: 500px;
+    height: 300px;
+
+    padding: 10px 5px;
+
+    background: #fff;
+    border: 1px solid gray;
+    border-radius: 8px;
+}
+
+#nameChange-holder > form {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: 20% auto 20%;
+    row-gap: 16px;
+
+
+    width: 100%;
+    height: 100%;
+}
+
+.formArea {
+    width: 100%;
+    height: 100%;
+}
+
+#nameChange {
+    resize: none;
 }

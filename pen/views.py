@@ -140,24 +140,14 @@ def files(request):
 def editFile(request):
     if (request.method == "UPDATE"):
         jsonObject = json.loads(request.body.decode("UTF-8"))
-
-        if ("edit" in jsonObject):
-            try:
-                hlp = Code.objects.all().filter(pk=jsonObject["fileID"]).filter(userFK=request.user)
-                hlp = hlp[0]
-                hlp.isPublic = (jsonObject["value"] == 1)
-                hlp.save()
-            except(KeyError, IndexError):
-                return JsonResponse({"ERR":"NOT MODIFIED"},status=304)
-
-        else:
-            try:
-                hlp = Code.objects.all().filter(pk=jsonObject["fileID"]).filter(userFK=request.user)
-                hlp = hlp[0]
-                hlp.projectName = jsonObject["newFileName"]
-                hlp.save()
-            except (KeyError, IndexError):
-                return JsonResponse({"ERR":"NOT MODIFIED"},status=304)
+        
+        try:
+            hlp = Code.objects.all().filter(pk=jsonObject["fileID"]).filter(userFK=request.user)
+            hlp = hlp[0]
+            hlp.isPublic = (jsonObject["value"] == 1)
+            hlp.save()
+        except(KeyError, IndexError):
+            return JsonResponse({"ERR":"NOT MODIFIED"},status=304)
 
         return JsonResponse({"OK":"MODIFIED"},status=200)
 
