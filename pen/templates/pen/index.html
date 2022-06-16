@@ -20,23 +20,23 @@
 
                     {% if array %}
                         {% for i in array %}
-                        <div class="projectHolder">
-                            <div class="fullScreenSelector">
-                                <i class="fa fa-arrows-alt" aria-hidden="true"></i>
-                            </div>
-                            <div>
-                                <iframe scrolling="no" src="#"></iframe>
-                            </div>
-                            <div class="projectHolder__Info">
-                                <span><a href="#">Here</a> you can see the full page!</span>
-                                <div>
-                                    <h3>{{ i.projectName }}</h3>
+                            <div class="projectHolder">
+                                <div class="fullScreenSelector">
+                                    <i class="fa fa-arrows-alt" aria-hidden="true"></i>
                                 </div>
                                 <div>
-                                    <h4>{{ i.userFK.username }}</h4>
+                                    <iframe scrolling="no" src="{% url 'fullPage' i.projectName i.userFK.username %}" sandbox></iframe>
                                 </div>
-                            </div>
-                        </div>
+                                <div class="projectHolder__Info">
+                                    <span><a href="{% url 'fullPage' i.projectName i.userFK.username %}">Here</a> you can see the full page!</span>
+                                    <div>
+                                        <h3>{{ i.projectName }}</h3>
+                                    </div>
+                                    <div>
+                                        <h4>{{ i.userFK.username }}</h4>
+                                    </div>
+                                </div>
+                            </div>                            
                         {% endfor %}
 
                     {% else %}

@@ -8,9 +8,9 @@ import json
 
 from .models import *
 
-# TODO: MAKE WORK THE 'last' KEY, AND THE API
-# TODO: MAKE WORK THE PROJECT URL
-# TODO: IFRAME SRC TO THE FILES
+# TODO: MAKE THE NAVIGATION IN THE INDEX PAGE
+
+# TODO: I'VE DONE THE FULL VIEW OF THE PROJECT PAGE, NOW WE SHOULD BE ABLE TO EDIT IT
 
 # TODO: IN THE FILES URL, MAYBE, WE DON'T NEED TO RELOAD THE PAGE... AND, THE NEW FILE NAME SHOULD BE REFRESH
 
@@ -109,7 +109,7 @@ def files(request):
                 "message":"You have to provide the file name" 
             })
         
-        name = request.POST["fileName"]    
+        name = request.POST["fileName"].strip()    
         public = "isPublic" in request.POST
         
         if ((len(name) < 4) or (len(name) > 36)):
@@ -165,3 +165,24 @@ def editFile(request):
 @login_required(login_url="/login")
 def likesList(request):
     return HttpResponse("likes list")
+
+
+def fullPage(request, name, creator):
+    try:
+        creatorIn = User.objects.all().filter(username=creator)[0]
+        nameIn = Code.objects.all().filter(projectName=name)[0]
+
+        if (nameIn.isPublic == False) and (request.user.username != creatorIn.username):
+            raise IndexError
+            
+    except IndexError:
+        return HttpResponseRedirect(reverse("index"))
+
+    
+
+    return render(request, "pen/fullPage.html", {
+        "javascript":nameIn.code_JS,
+        "css":nameIn.code_CSS,
+        "html":nameIn.code_HTML,
+        "title":f"{name} [{creator}]",
+    })

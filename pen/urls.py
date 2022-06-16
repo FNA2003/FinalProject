@@ -11,6 +11,9 @@ urlpatterns = [
     path("likes", views.likesList, name="likes"),
     path("files", views.files, name="files"),
 
+    
+    path("view/<str:name>/<str:creator>", views.fullPage, name="fullPage"),
+
 
     # API
     path("editFile", views.editFile, name="editFile"),

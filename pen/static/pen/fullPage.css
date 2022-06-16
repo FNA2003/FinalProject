@@ -1,0 +1,24 @@
+#HOME-BUTTON a{
+    position: sticky;
+    top: 2vh;
+    left: 2vw;
+
+    font-size: 24px;
+    text-decoration: none;
+
+    color: white;
+    text-shadow: #752bff 1px 0px 0px, 
+    #752bff 0.540302px 0.841471px 0px, 
+    #752bff -0.416147px 0.909297px 0px, 
+    #752bff -0.989993px 0.14112px 0px, 
+    #752bff -0.653644px -0.756803px 0px, 
+    #752bff 0.283662px -0.958924px 0px, 
+    #752bff 0.96017px -0.279416px 0px, 
+    #3c10ff 0 0 30px;
+
+    transition: font-size .3s;
+}
+
+#HOME-BUTTON a:hover { font-size: 2em; }
+
+body > div { margin-top: 20px; }

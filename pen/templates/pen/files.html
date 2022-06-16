@@ -24,11 +24,11 @@
                     {% for i in projectsArray %}
                     
                     <div class="projectHolder">
-                        <iframe src="#" frameborder="0" scrolling="no"></iframe>
+                        <iframe src="{% url 'fullPage' i.projectName i.userFK.username %}" frameborder="0" scrolling="no" sandbox></iframe>
                         <input type="hidden" value="{{ i.id }}" />
                         <h3>{{ i.projectName }}</h3>
                         <div class="icons"> 
-                            <a href="#"><i class="fa fa-external-link" aria-hidden="true"></i></a>
+                            <a href="{% url 'fullPage' i.projectName i.userFK.username %}"><i class="fa fa-external-link" aria-hidden="true"></i></a>
                             <i class="fa fa-trash-o" aria-hidden="true"></i>
                             {% if i.isPublic == False %}
                             <i class="fa fa-eye-slash" aria-hidden="true"></i>

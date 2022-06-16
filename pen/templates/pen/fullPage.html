@@ -1,0 +1,21 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <title>{{ title }}</title>
+        <script src="{% static 'pen/fullPage.js' %}"></script>
+        <link rel="stylesheet" href="{% static 'pen/fullPage.css' %}">
+    </head>
+    <body>
+        <span id="HOME-BUTTON"><a href="{% url 'index' %}">C{}DE!</a></span>
+        <div>
+            <script> {{ javascript }} </script>
+            <style> {{ css }} </style>
+            {{ html }}            
+        </div>
+    </body>
+</html>
