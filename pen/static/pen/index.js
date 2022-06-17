@@ -35,6 +35,16 @@ document.addEventListener("DOMContentLoaded", () => {
             
         });
     });
+
+    document.querySelectorAll(".likeButton").forEach(button => {
+        button.addEventListener("click", () => {
+            if(button.classList[1] === "fa-thumbs-o-up") {
+                console.log("LIKE :O")
+            } else {
+                console.log("DISLIKE :C")
+            }
+        });
+    });
 });
 
 document.addEventListener("scroll", () => {

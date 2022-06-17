@@ -1,0 +1,27 @@
+#Img-noArr {
+    width: 100%;
+    height: 60vh;
+
+    object-fit: cover;
+}
+
+#H3-noArr {
+    color: #fff;
+    text-align: center;
+    text-shadow: 0 0 4px black;
+
+    position: relative;
+    bottom: 5vh;
+}
+
+#H3-noArr a {
+    color:#8e80e2;
+    text-decoration: none;
+
+    transition: font-size .3s;
+}
+
+#H3-noArr a:hover {
+    font-size: 1.08em;
+    text-decoration: underline;
+}

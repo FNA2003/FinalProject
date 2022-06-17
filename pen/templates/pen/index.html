@@ -36,6 +36,15 @@
                                         <h4>{{ i.userFK.username }}</h4>
                                     </div>
                                 </div>
+                                {% if i.userFK.username != user.username %}
+                                <div class="likeContainer">
+                                    {% if i.liked == False %}
+                                        <i class="fa fa-thumbs-o-up likeButton" aria-hidden="true"></i>
+                                    {% else %}
+                                        <i class="fa fa-thumbs-up likeButton" aria-hidden="true"></i>
+                                    {% endif %}
+                                </div>
+                                {% endif %}
                             </div>                            
                         {% endfor %}
 

@@ -10,6 +10,8 @@ from .models import *
 
 # TODO: MAKE THE NAVIGATION IN THE INDEX PAGE
 
+# TODO: I'VE DONE THE LOGIC OF THE LIKE AND DISLIKE OF A PAGE, WE SHOULD BE ABLE TO REALLY LIKE OR DISLIKE
+
 # TODO: I'VE DONE THE FULL VIEW OF THE PROJECT PAGE, NOW WE SHOULD BE ABLE TO EDIT IT
 
 # TODO: IN THE FILES URL, MAYBE, WE DON'T NEED TO RELOAD THE PAGE... AND, THE NEW FILE NAME SHOULD BE REFRESH
@@ -21,8 +23,25 @@ def index(request):
     except IndexError:
         lastId = 0
 
+    newArr = []
+    for i in codeArr:
+        liked = True
+        try: 
+            a = Likes.objects.all().filter(codeFK__pk=i.pk).filter(likerFK__username=request.user.username)[0]
+            if a.eliminated == True:
+                raise IndexError
+            
+        except IndexError:
+            liked = False
+
+        newArr.append({ 
+            "projectName":i.projectName,
+            "userFK":i.userFK,
+            "liked":liked
+        })
+
     return render(request, "pen/index.html", {
-        "array":codeArr,
+        "array":newArr,
         "last":lastId
     })
 
@@ -164,7 +183,7 @@ def editFile(request):
 
 @login_required(login_url="/login")
 def likesList(request):
-    return HttpResponse("likes list")
+    return render(request, "pen/likes.html")
 
 
 def fullPage(request, name, creator):
