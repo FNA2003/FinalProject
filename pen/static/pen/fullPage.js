@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    console.log(document.body.innerHTML.length);
-    if (document.body.innerHTML.length <= 184) {
+    if (document.body.innerHTML.length <= 207) {
         let header = document.createElement("img");
         header.src = "https://dustoffthebible.com/wp-content/uploads/2016/11/Business-cat-meme-blank.png";
         header.style.cssText = `display: block; 
@@ -21,12 +20,18 @@ document.addEventListener("DOMContentLoaded", () => {
         document.body.appendChild(header);
         document.body.appendChild(memeText);
 
+
         let anchor = document.querySelector("#HOME-BUTTON a");
+        
         anchor.style.cssText = `position: absolute;
-                                display: block;
                                 width: 95%;
                                 text-align: center;
                                 top: 5vh;`
         anchor.innerHTML = '<i class="fa fa-home" aria-hidden="true"></i>'
+
+        document.querySelector("body > div").style.cssText = "margin-top: 0;";
+        document.body.style.cssText = ` background: rgb(201,64,137);
+                                        background: radial-gradient(circle, rgba(201,64,137,1) 0%, rgba(95,47,208,1) 55%, 
+                                        rgba(16,90,185,1) 75%); `;
     }
 });
