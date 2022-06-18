@@ -38,13 +38,39 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.querySelectorAll(".likeButton").forEach(button => {
         button.addEventListener("click", () => {
-            if(button.classList[1] === "fa-thumbs-o-up") {
-                
-                /* TODO: */
+            
+            let name = button.parentElement.parentElement.children[2].children[1].children[0].innerHTML;
+            let author = button.parentElement.parentElement.children[2].children[2].children[0].innerHTML
+
+            if(button.classList[1] === "fa-thumbs-up") {
+                fetch("/likeFile", {
+                    method:"POST",
+                    headers:{
+                        "Content-type":"application/json; charset=UTF-8"
+                    },
+                    body: JSON.stringify({
+                        "action":"Take off",
+                        "author":author,
+                        "file":name
+                    })
+                })
+                    .then(response => { console.log(response); location.reload(); })
+                    .catch(error => { console.log(error); location.reload(); });
 
             } else {
-                
-                /* TODO:  */
+                fetch("/likeFile", {
+                    method:"POST",
+                    headers:{
+                        "Content-type":"application/json; charset=UTF-8"
+                    },
+                    body: JSON.stringify({
+                        "action":"Put",
+                        "author":author,
+                        "file":name
+                    })
+                })
+                    .then(response => { console.log(response); location.reload(); })
+                    .catch(error => { console.log(error); location.reload(); });
 
             }
         });

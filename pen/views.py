@@ -11,11 +11,16 @@ from .models import *
 
 # TODO: MAKE THE NAVIGATION IN THE INDEX PAGE
 
-# TODO: I'VE DONE THE LIKE API, ADD THE FETCH LIKE IN THE FULL-PAGE, NOW, WE NEED TO ADD IT TO THE HOME PAGE
-
 # TODO: I'VE DONE THE FULL VIEW OF THE PROJECT PAGE, NOW WE SHOULD BE ABLE TO EDIT IT
 
-# TODO: IN THE FILES URL, MAYBE, WE DON'T NEED TO RELOAD THE PAGE... AND, THE NEW FILE NAME SHOULD BE REFRESH
+# TODO: IN THE INDEX PAGE, WHEN WE LIKE A PROJECT, WE MAY NOT NEED TO RELOAD THE PAGE
+
+# TODO: DO ALL OF THE PAGE IN THE LIKES URL
+
+
+""" NASHE: PARA PONER UN LIKE Y SACARLO SIN RECARGAR LA PAGINA TENEMOS QUE DEJAR QUE EL BACKEND
+COMPRUEBE SI EL USUARIO YA HABIA LIKEADO O NO EL PROJECTO... EN LA PAGINA SOLAMENTE CAMBIAMOS LA CLASE DEL BOTON
+Y LISTO... NASHE? """
 
 def index(request):
     codeArr = Code.objects.all().filter(isPublic=True).order_by("id")[::-1][:10]
@@ -105,12 +110,13 @@ def logOut(request):
 
 @login_required(login_url="/login")
 def profile(request):
-    files = Code.objects.all().filter(userFK=request.user)
+    files = Code.objects.all().filter(userFK=request.user).order_by("id")
     likes = len(Likes.objects.all().filter(likerFK=request.user).filter(eliminated=False))
+
 
     return render(request, "pen/profile.html", {
         "filesArr":files,
-        "likesNumber":likes
+        "userLikes":likes,
     })
 
 
@@ -202,6 +208,9 @@ def likeFile(request):
     if (jsonObject["action"] == "Put"):
         if likeObject == 0:
             newLike = Likes(codeFK=project, likerFK=request.user)
+            project.likesCount =  (int(project.likesCount) + 1)
+
+            project.save()
             newLike.save()
         elif likeObject != 0 and likeObject.eliminated == True:
             likeObject.eliminated = False
@@ -224,7 +233,14 @@ def likeFile(request):
 
 @login_required(login_url="/login")
 def likesList(request):
-    return render(request, "pen/likes.html")
+    a = Likes.objects.all().filter(likerFK=request.user).filter(codeFK__isPublic=True).filter(eliminated=False)
+    b = []
+    for i in a:
+        b.append(i.codeFK)
+
+    return render(request, "pen/likes.html",{
+        "array":b
+    })
 
 
 def fullPage(request, name, creator):

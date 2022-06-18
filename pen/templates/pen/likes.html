@@ -9,7 +9,27 @@
 
 
     {% if array %}
-        <h1>aña</h1>
+        
+        
+        <div id="body-firstContainer">
+            <div>
+                <div id="projectsContainer">
+                    {% for i in array %}
+                    <div class="projectContainer">
+                        <div><iframe src="{% url 'fullPage' i.projectName i.userFK.username %}" scrolling="no" sandbox></iframe></div>
+                        <div><h3>{{ i.projectName }}</h3></div>
+                        <div><span>{{ i.userFK.username }}</span></div>
+                        <div>
+                            <a href="#"> <i class="fa fa-thumbs-o-up" aria-hidden="true"></i> </a>
+                            <a href="{% url 'fullPage' i.projectName i.userFK.username %}"> <i class="fa fa-external-link-square" aria-hidden="true"></i> </a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+
     {% else %}
         <img id="Img-noArr" src="https://static.onecms.io/wp-content/uploads/sites/28/2019/03/man-with-binoculars-safari-BINOCULARS0319.jpg" alt="NOT FOUND">
         <h3 id="H3-noArr">It seems that you didn't liked any project, see in the <a href="{% url 'index' %}">Home</a> page a few of them</h3>
