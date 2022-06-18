@@ -17,4 +17,5 @@ urlpatterns = [
 
     # API
     path("editFile", views.editFile, name="editFile"),
+    path("likeFile", views.likeFile, name="likeFile")
 ]

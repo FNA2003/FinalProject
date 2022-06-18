@@ -2,6 +2,7 @@ from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, HttpResponse, HttpResponseRedirect
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
 from django.urls import reverse
 from django.db import IntegrityError
 import json
@@ -10,7 +11,7 @@ from .models import *
 
 # TODO: MAKE THE NAVIGATION IN THE INDEX PAGE
 
-# TODO: I'VE DONE THE LOGIC OF THE LIKE AND DISLIKE OF A PAGE, WE SHOULD BE ABLE TO REALLY LIKE OR DISLIKE
+# TODO: I'VE DONE THE LIKE API, ADD THE FETCH LIKE IN THE FULL-PAGE, NOW, WE NEED TO ADD IT TO THE HOME PAGE
 
 # TODO: I'VE DONE THE FULL VIEW OF THE PROJECT PAGE, NOW WE SHOULD BE ABLE TO EDIT IT
 
@@ -181,21 +182,71 @@ def editFile(request):
 
         return JsonResponse({"OK":"MODIFIED"}, status=200)
 
+@csrf_exempt
+@login_required(login_url="/login")
+def likeFile(request):
+    jsonObject = json.loads(request.body.decode("UTF-8"))
+    
+
+    try:
+        project = Code.objects.all().filter(userFK__username=jsonObject["author"]).filter(projectName=jsonObject["file"])[0]
+    except IndexError:
+        return JsonResponse({"ERR":"Project not found!"},status=400)
+
+    likeObject = 0
+    try:
+        likeObject = Likes.objects.all().filter(codeFK__pk=project.pk).filter(likerFK__username=request.user.username)[0]
+    except IndexError:
+        pass
+
+    if (jsonObject["action"] == "Put"):
+        if likeObject == 0:
+            newLike = Likes(codeFK=project, likerFK=request.user)
+            newLike.save()
+        elif likeObject != 0 and likeObject.eliminated == True:
+            likeObject.eliminated = False
+            project.likesCount =  (int(project.likesCount) + 1)
+            
+            project.save()
+            likeObject.save()
+    else:
+        if likeObject == 0:
+            return JsonResponse({"ERR":"You can't unlike something that you didn't liked"}, status=400)
+        elif likeObject != 0 and likeObject.eliminated == False:
+            likeObject.eliminated = True
+            project.likesCount =  (int(project.likesCount) - 1)
+            
+            project.save()
+            likeObject.save()
+
+
+    return JsonResponse({"OK":"MODIFIED"},status=200)
+
 @login_required(login_url="/login")
 def likesList(request):
     return render(request, "pen/likes.html")
 
 
 def fullPage(request, name, creator):
+    liked = True
+
     try:
         creatorIn = User.objects.all().filter(username=creator)[0]
         nameIn = Code.objects.all().filter(projectName=name)[0]
-
+        
         if (nameIn.isPublic == False) and (request.user.username != creatorIn.username):
             raise IndexError
-            
     except IndexError:
         return HttpResponseRedirect(reverse("index"))
+
+    
+    try:
+        if (request.user.username != ""):
+            a = Likes.objects.all().filter(codeFK__pk=nameIn.pk).filter(likerFK__username=request.user.username)[0]
+            if (a.eliminated == True):     
+                raise IndexError
+    except IndexError:
+        liked = False
 
     
 
@@ -204,4 +255,7 @@ def fullPage(request, name, creator):
         "css":nameIn.code_CSS,
         "html":nameIn.code_HTML,
         "title":f"{name} [{creator}]",
+        "creator":creator,
+        "liked":liked,
+        "fileName":name
     })

@@ -5,6 +5,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/182/182942.png"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <title>{{ title }}</title>
         <script src="{% static 'pen/fullPage.js' %}"></script>
@@ -12,10 +13,21 @@
     </head>
     <body>
         <span id="HOME-BUTTON"><a href="{% url 'index' %}" style="display: none;">C{}DE!</a></span>
+        <span id="authorName" style="display: none;">{{ creator }}</span>
+        <span id="fileName" style="display: none;">{{ fileName }}</span>
+        {% if creator != user.username and user.is_authenticated %}
+            <span id="likeButtonContainer" style="display: none;">
+                {% if liked == False %}
+                    <i class="fa fa-thumbs-o-up likeButton" aria-hidden="true" style="display: none;"></i>
+                {% else %}
+                    <i class="fa fa-thumbs-up likeButton" aria-hidden="true" style="display: none;"></i>
+                {% endif %}
+            </span>
+        {% endif %}
         <div>
             <script> {{ javascript }} </script>
             <style> {{ css }} </style>
-            {{ html }}            
+            {{ html }}
         </div>
     </body>
 </html>

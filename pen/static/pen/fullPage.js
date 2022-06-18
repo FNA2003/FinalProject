@@ -1,5 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
-    if (document.body.innerHTML.length <= 207) {
+    let fileName = document.querySelector("#fileName").innerHTML;
+    let author = document.querySelector("#authorName").innerHTML;
+
+    if (document.body.innerHTML.length <= 580) {
         let header = document.createElement("img");
         header.src = "https://dustoffthebible.com/wp-content/uploads/2016/11/Business-cat-meme-blank.png";
         header.style.cssText = `display: block; 
@@ -11,7 +14,6 @@ document.addEventListener("DOMContentLoaded", () => {
         memeText.style.cssText = `position: absolute;
                                   top: 80vh;
                                   left: 0;
-                                  display: block;
                                   width: 100%;
                                   text-align: center;
                                   color: white;
@@ -33,5 +35,49 @@ document.addEventListener("DOMContentLoaded", () => {
         document.body.style.cssText = ` background: rgb(201,64,137);
                                         background: radial-gradient(circle, rgba(201,64,137,1) 0%, rgba(95,47,208,1) 55%, 
                                         rgba(16,90,185,1) 75%); `;
-    }
+
+        document.querySelector("#likeButtonContainer").style.display = "none";
+    } 
+
+
+    document.querySelectorAll(".likeButton").forEach(button => {
+        button.style.display = "block";
+        button.addEventListener("click", () => {
+
+
+            if (button.classList[1] === "fa-thumbs-up") {
+                fetch("/likeFile", {
+                    method:"POST",
+                    headers:{
+                        "Content-type":"application/json; charset=UTF-8"
+                    },
+                    body: JSON.stringify({
+                        "action":"Take off",
+                        "author":author,
+                        "file":fileName
+                    })
+                })
+                    .then(response => { console.log(response); location.reload(); })
+                    .catch(error => { console.log(error); location.reload(); });
+            } else {
+                fetch("/likeFile", {
+                    method:"POST",
+                    headers:{
+                        "Content-type":"application/json; charset=UTF-8"
+                    },
+                    body: JSON.stringify({
+                        "action":"Put",
+                        "author":author,
+                        "file":fileName
+                    })
+                })
+                    .then(response => { console.log(response); location.reload(); })
+                    .catch(error => { console.log(error); location.reload(); });
+            }
+        });
+    });
+
+    document.querySelector("#likeButtonContainer").style.display = "flex";
+    document.querySelector("#HOME-BUTTON a").style.display = "block";
+    
 });

@@ -19,6 +19,32 @@
     transition: font-size .3s;
 }
 
-#HOME-BUTTON a:hover { font-size: 2em; }
+#HOME-BUTTON a:hover { font-size: 1.5em; }
 
 body > div { margin-top: 20px; }
+
+#likeButtonContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;    
+
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+    
+    width: 60px;
+    height: 60px;
+    
+    border: 1px solid black;
+    border-radius: 10px;
+    background: white;
+
+    z-index: 1000;
+}
+
+.likeButton { transition: font-size .2s; }
+
+.likeButton:hover {
+    font-size: 1.3em;
+    cursor: pointer;
+} 
