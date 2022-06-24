@@ -13,14 +13,6 @@ from .models import *
 
 # TODO: I'VE DONE THE FULL VIEW OF THE PROJECT PAGE, NOW WE SHOULD BE ABLE TO EDIT IT
 
-# TODO: IN THE INDEX PAGE, WHEN WE LIKE A PROJECT, WE MAY NOT NEED TO RELOAD THE PAGE
-
-# TODO: DO ALL OF THE PAGE IN THE LIKES URL
-
-
-""" NASHE: PARA PONER UN LIKE Y SACARLO SIN RECARGAR LA PAGINA TENEMOS QUE DEJAR QUE EL BACKEND
-COMPRUEBE SI EL USUARIO YA HABIA LIKEADO O NO EL PROJECTO... EN LA PAGINA SOLAMENTE CAMBIAMOS LA CLASE DEL BOTON
-Y LISTO... NASHE? """
 
 def index(request):
     codeArr = Code.objects.all().filter(isPublic=True).order_by("id")[::-1][:10]
@@ -119,6 +111,17 @@ def profile(request):
         "userLikes":likes,
     })
 
+@login_required(login_url="/login")
+def edit(request, fileName):
+    fileExist = Code.objects.all().filter(userFK_id=request.user.id).filter(projectName=fileName)
+    try:
+        fileExist = fileExist[0]
+        if (request.user.username == ""):
+            raise IndexError
+    except IndexError:
+        return HttpResponseRedirect(reverse("files"))
+
+    return HttpResponse(f"{request.user.username} and {fileExist}")
 
 @login_required(login_url="/login")
 def files(request):
@@ -193,7 +196,6 @@ def editFile(request):
 def likeFile(request):
     jsonObject = json.loads(request.body.decode("UTF-8"))
     
-
     try:
         project = Code.objects.all().filter(userFK__username=jsonObject["author"]).filter(projectName=jsonObject["file"])[0]
     except IndexError:
@@ -205,29 +207,23 @@ def likeFile(request):
     except IndexError:
         pass
 
-    if (jsonObject["action"] == "Put"):
-        if likeObject == 0:
-            newLike = Likes(codeFK=project, likerFK=request.user)
-            project.likesCount =  (int(project.likesCount) + 1)
 
-            project.save()
-            newLike.save()
-        elif likeObject != 0 and likeObject.eliminated == True:
-            likeObject.eliminated = False
-            project.likesCount =  (int(project.likesCount) + 1)
-            
-            project.save()
-            likeObject.save()
+    if (likeObject == 0):
+        newLike = Likes(codeFK=project, likerFK=request.user)
+        project.likesCount = int(project.likesCount) + 1
+        project.save()
+        newLike.save()
     else:
-        if likeObject == 0:
-            return JsonResponse({"ERR":"You can't unlike something that you didn't liked"}, status=400)
-        elif likeObject != 0 and likeObject.eliminated == False:
+        if (likeObject.eliminated == False):
             likeObject.eliminated = True
-            project.likesCount =  (int(project.likesCount) - 1)
-            
+            project.likesCount = int(project.likesCount) - 1
             project.save()
             likeObject.save()
-
+        else:
+            likeObject.eliminated = False
+            project.likesCount = int(project.likesCount) + 1
+            project.save()
+            likeObject.save()
 
     return JsonResponse({"OK":"MODIFIED"},status=200)
 

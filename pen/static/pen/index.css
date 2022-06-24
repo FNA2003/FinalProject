@@ -106,7 +106,7 @@
     cursor: pointer;
 }
 
-.likeContainer {
+.likeContainer, .editContainer  {
     position: relative;
     bottom: 100%;
     text-align: right;
@@ -115,9 +115,11 @@
     padding-bottom: 5px;
 }
 
-.likeContainer i { transition: font-size .4s; }
+.likeContainer i, .editContainer i { transition: font-size .4s; }
 
-.likeContainer i:hover { font-size: 1.2em; cursor: pointer; }
+.likeContainer i:hover,  .editContainer i:hover { font-size: 1.2em; cursor: pointer; }
+
+.editContainer a { color: white; }
 
 #goUp {
     display: flex;

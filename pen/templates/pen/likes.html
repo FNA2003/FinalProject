@@ -6,6 +6,7 @@
 
 {% block body %}
     <link rel="stylesheet" href="{% static 'pen/likes.css' %}">
+    <script src="{% static 'pen/likes.js' %}"></script>
 
 
     {% if array %}
@@ -14,17 +15,29 @@
         <div id="body-firstContainer">
             <div>
                 <div id="projectsContainer">
-                    {% for i in array %}
-                    <div class="projectContainer">
-                        <div><iframe src="{% url 'fullPage' i.projectName i.userFK.username %}" scrolling="no" sandbox></iframe></div>
-                        <div><h3>{{ i.projectName }}</h3></div>
-                        <div><span>{{ i.userFK.username }}</span></div>
+                    <div>
+                        <h2>Likes</h2>
+                        <hr>
                         <div>
-                            <a href="#"> <i class="fa fa-thumbs-o-up" aria-hidden="true"></i> </a>
-                            <a href="{% url 'fullPage' i.projectName i.userFK.username %}"> <i class="fa fa-external-link-square" aria-hidden="true"></i> </a>
+                            <img src="https://icons.veryicon.com/png/o/miscellaneous/two-color-icon-library/user-286.png" />
+                            <h3>{{ user.username }}</h3>
                         </div>
                     </div>
-                    {% endfor %}
+                    <div>
+                        {% for i in array %}
+                        <div class="projectContainer">
+                            <div><iframe src="{% url 'fullPage' i.projectName i.userFK.username %}" scrolling="no" sandbox></iframe></div>
+                            <div>
+                                <h4><strong>{{ i.projectName }}</strong></h4>
+                                <span>{{ i.userFK.username }}</span>
+                                <div class="buttonsContainer">
+                                    <span> <i class="fa fa-thumbs-up likeButton" aria-hidden="true"></i> </span>
+                                    <a href="{% url 'fullPage' i.projectName i.userFK.username %}"> <i class="fa fa-external-link-square" aria-hidden="true"></i> </a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
         </div>

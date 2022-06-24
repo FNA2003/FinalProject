@@ -13,6 +13,7 @@ urlpatterns = [
 
     
     path("view/<str:name>/<str:creator>", views.fullPage, name="fullPage"),
+    path("edit/<str:fileName>", views.edit, name="edit"),
 
 
     # API

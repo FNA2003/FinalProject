@@ -61,25 +61,20 @@
     text-overflow: clip;
 }
 
-.fa-trash-o:hover {
-    cursor: pointer;
-    color: #c92f2f;
-}
-
-.fa-eye-slash:hover, .fa-eye:hover {
-    color: yellow;
-    cursor: pointer;
-}
-
-.projectHolder a{ color: black; }
-
-.projectHolder a:hover { color: #0303f3; }
-
 .icons {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
 }
+.icons a{ color: #000; }
+.icons a:hover { color: black!important; cursor: auto; }
+.icons i:hover { cursor: pointer; }
+
+.fa-trash-o:hover { color: #c92f2f; }
+.fa-pencil:hover { color: #6f2; }
+.fa-external-link:hover { color: blue; }
+.fa-eye-slash:hover, .fa-eye:hover { color: yellow; }
+
 
 #formHolder {
     display: none;

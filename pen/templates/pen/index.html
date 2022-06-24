@@ -44,6 +44,10 @@
                                         <i class="fa fa-thumbs-up likeButton" aria-hidden="true"></i>
                                     {% endif %}
                                 </div>
+                                {% elif i.userFK.username == user.username %}
+                                <div class="editContainer"> 
+                                    <a href="{% url 'edit' i.projectName %}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                </div>
                                 {% endif %}
                             </div>                            
                         {% endfor %}

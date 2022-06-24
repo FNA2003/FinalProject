@@ -42,40 +42,37 @@ document.addEventListener("DOMContentLoaded", () => {
             let name = button.parentElement.parentElement.children[2].children[1].children[0].innerHTML;
             let author = button.parentElement.parentElement.children[2].children[2].children[0].innerHTML
 
-            if(button.classList[1] === "fa-thumbs-up") {
-                fetch("/likeFile", {
-                    method:"POST",
-                    headers:{
-                        "Content-type":"application/json; charset=UTF-8"
-                    },
-                    body: JSON.stringify({
-                        "action":"Take off",
-                        "author":author,
-                        "file":name
-                    })
+            fetch("/likeFile", {
+                method:"POST",
+                headers:{
+                    "Content-type":"application/json; charset=UTF-8"
+                },
+                body: JSON.stringify({
+                    "author":author,
+                    "file":name
                 })
-                    .then(response => { console.log(response); location.reload(); })
-                    .catch(error => { console.log(error); location.reload(); });
+            })
+                .then(response => { 
+                    console.log(response); 
 
-            } else {
-                fetch("/likeFile", {
-                    method:"POST",
-                    headers:{
-                        "Content-type":"application/json; charset=UTF-8"
-                    },
-                    body: JSON.stringify({
-                        "action":"Put",
-                        "author":author,
-                        "file":name
-                    })
+                    switch(button.classList[1]){
+                        case "fa-thumbs-up":
+                            button.className = `fa fa-thumbs-o-up likeButton`;
+                            break;
+                        case "fa-thumbs-o-up":
+                            button.className = `fa fa-thumbs-up likeButton`;
+                            break;
+                        default:
+                            console.error("Something is missing!");
+                            setTimeout(() => { location.reload(); }, 200);
+                    }
                 })
-                    .then(response => { console.log(response); location.reload(); })
-                    .catch(error => { console.log(error); location.reload(); });
+                .catch(error => { console.log(error); });
 
-            }
         });
     });
 });
+
 
 document.addEventListener("scroll", () => {
     if (scrollY >= 150) {

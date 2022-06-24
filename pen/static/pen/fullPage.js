@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    let fileName = document.querySelector("#fileName").innerHTML;
+    let name = document.querySelector("#fileName").innerHTML;
     let author = document.querySelector("#authorName").innerHTML;
 
     if (document.body.innerHTML.length <= 580) {
@@ -43,37 +43,33 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll(".likeButton").forEach(button => {
         button.style.display = "block";
         button.addEventListener("click", () => {
-
-
-            if (button.classList[1] === "fa-thumbs-up") {
-                fetch("/likeFile", {
-                    method:"POST",
-                    headers:{
-                        "Content-type":"application/json; charset=UTF-8"
-                    },
-                    body: JSON.stringify({
-                        "action":"Take off",
-                        "author":author,
-                        "file":fileName
-                    })
+            
+            fetch("/likeFile", {
+                method:"POST",
+                headers:{
+                    "Content-type":"application/json; charset=UTF-8"
+                },
+                body: JSON.stringify({
+                    "author":author,
+                    "file":name
                 })
-                    .then(response => { console.log(response); location.reload(); })
-                    .catch(error => { console.log(error); location.reload(); });
-            } else {
-                fetch("/likeFile", {
-                    method:"POST",
-                    headers:{
-                        "Content-type":"application/json; charset=UTF-8"
-                    },
-                    body: JSON.stringify({
-                        "action":"Put",
-                        "author":author,
-                        "file":fileName
-                    })
+            })
+                .then(response => { 
+                    console.log(response); 
+                    
+                    switch(button.classList[1]){
+                        case "fa-thumbs-up":
+                            button.className = `fa fa-thumbs-o-up likeButton`;
+                            break;
+                        case "fa-thumbs-o-up":
+                            button.className = `fa fa-thumbs-up likeButton`;
+                            break;
+                        default:
+                            console.error("Something is missing!");
+                            setTimeout(() => { location.reload(); }, 200);
+                    }
                 })
-                    .then(response => { console.log(response); location.reload(); })
-                    .catch(error => { console.log(error); location.reload(); });
-            }
+                .catch(error => { console.log(error); });
         });
     });
 

@@ -29,6 +29,7 @@
                         <h3>{{ i.projectName }}</h3>
                         <div class="icons"> 
                             <a href="{% url 'fullPage' i.projectName i.userFK.username %}"><i class="fa fa-external-link" aria-hidden="true"></i></a>
+                            <a href="{% url 'edit' i.projectName %}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                             <i class="fa fa-trash-o" aria-hidden="true"></i>
                             {% if i.isPublic == False %}
                             <i class="fa fa-eye-slash" aria-hidden="true"></i>
