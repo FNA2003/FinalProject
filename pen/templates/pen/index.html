@@ -8,6 +8,11 @@
 <link rel="stylesheet" href="{% static 'pen/index.css' %}">
 <script src="{% static 'pen/index.js' %}"></script>
 
+<div id="info" style="display: none;">
+    <span>{{ user.is_authenticated }}</span>
+    <span>{{ user.username }}</span>
+</div>
+
 <div id="body-content">
     <div>
         <div>
@@ -59,6 +64,9 @@
                     {% endif %}
 
                 </div>
+            </div>
+            <div id="lastId">
+                <span>{{ last }}</span>
             </div>
         </div>
         

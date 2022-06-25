@@ -13,6 +13,14 @@ from .models import *
 
 # TODO: I'VE DONE THE FULL VIEW OF THE PROJECT PAGE, NOW WE SHOULD BE ABLE TO EDIT IT
 
+# TODO: RESPONSIVE DESIGN
+
+# TODO: WE MAY USE THE CSFR TOKEN, NOT EXEMPT THAT
+
+# TODO: UPDATE THE CONSOLE INFO WHEN FETCH, CHECK THE INDEX JS FILE
+
+# TODO: MAKE THE ACTIONS WHEN WE LOAD THE NEWEST POSTS, LIKE THE FULL PAGE AND THE LIKE BUTTON (WE CAN MAKE IT BY ADDING FUNCTIONS AND REMOVING THE ANONYMUS FUNCTIONS)
+
 
 def index(request):
     codeArr = Code.objects.all().filter(isPublic=True).order_by("id")[::-1][:10]
@@ -42,6 +50,39 @@ def index(request):
         "array":newArr,
         "last":lastId
     })
+
+def getPosts(request, lastId):
+    if request.method == "GET":
+        if lastId <= 1:
+            return JsonResponse({"Bad request":"That's the last post"},status=400)
+        
+        objects = Code.objects.all().order_by("id").filter(id__lt=lastId)[::-1]
+        array = []
+
+        if (len(objects) > 10):
+            objects = objects[:10]
+        elif (len(objects) < 1):
+            return JsonResponse({"OK":"No content"},status=204)
+
+        for i in objects:
+            liked = False
+            try:
+                a =  Likes.objects.all().filter(codeFK=i).filter(likerFK=request.user)[0]
+                if a.eliminated == True:
+                    raise IndexError
+                else:
+                    liked = True
+            except IndexError:
+                pass
+
+            array.append({ 
+                "id":i.pk,
+                "projectName":i.projectName,
+                "creator":i.userFK.username,
+                "liked":liked
+            })
+
+        return JsonResponse({ "array": array },status=200)
 
 def register(request):
     if request.method == "GET":

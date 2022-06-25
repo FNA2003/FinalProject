@@ -40,6 +40,7 @@
 }
 
 .projectHolder {
+    margin: 20px 10px;
     display: grid;
     grid-template-rows: 5% 75% 20%;
     grid-template-columns: auto;
@@ -180,3 +181,5 @@
 .footer-link:hover {
     letter-spacing: 2px;
 }
+
+#lastId { display: none; }
