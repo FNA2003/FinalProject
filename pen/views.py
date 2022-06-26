@@ -9,7 +9,10 @@ import json
 
 from .models import *
 
-# TODO: I'VE DONE THE FULL VIEW OF THE PROJECT PAGE, NOW WE SHOULD BE ABLE TO EDIT IT
+# TODO: I'VE DONE THE FULL VIEW OF THE PROJECT PAGE, NOW WE SHOULD BE ABLE TO EDIT IT, WE WILL USE THE EDIT HTML 
+# (CAUSE I DON'T REMEMBER WHAT I'VE DONE IN THE CODEMAKER.HTML, USE IT TO SEE SOME APROCHES)
+
+# TODO: REPAIR THE EDIT.HTML FILE AND ADD A SAVE BUTTON
 
 # TODO: RESPONSIVE DESIGN
 
@@ -17,6 +20,7 @@ from .models import *
 
 # TODO: SHOULD WE LOAD SOME AMOUNT OF POSTS IN THE FILES AND LIKES PAGES???
 
+# TODO: SHOULD WE LET THE CREATOR GO TO THE EDIT PAGE FROM THE FULL PAGE??
 
 def index(request):
     codeArr = Code.objects.all().filter(isPublic=True).order_by("id")[::-1][:6]
@@ -152,7 +156,9 @@ def edit(request, fileName):
     except IndexError:
         return HttpResponseRedirect(reverse("files"))
 
-    return HttpResponse(f"{request.user.username} and {fileExist}")
+    return render(request, "pen/edit.html", {
+        "file":fileExist
+    })
 
 @login_required(login_url="/login")
 def files(request):
@@ -297,7 +303,6 @@ def fullPage(request, name, creator):
         "javascript":nameIn.code_JS,
         "css":nameIn.code_CSS,
         "html":nameIn.code_HTML,
-        "title":f"{name} [{creator}]",
         "creator":creator,
         "liked":liked,
         "fileName":name
