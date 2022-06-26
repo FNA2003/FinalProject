@@ -54,8 +54,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     "file":name
                 })
             })
-                .then(response => { 
-                    console.log(response); 
+                .catch(error => { console.log(error); })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data); 
                     
                     switch(button.classList[1]){
                         case "fa-thumbs-up":
@@ -68,8 +70,8 @@ document.addEventListener("DOMContentLoaded", () => {
                             console.error("Something is missing!");
                             setTimeout(() => { location.reload(); }, 200);
                     }
-                })
-                .catch(error => { console.log(error); });
+                });
+                
         });
     });
 

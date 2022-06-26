@@ -16,16 +16,19 @@ document.addEventListener("DOMContentLoaded", () => {
                     "file":name
                 })
             })
-                .then(response => { 
-                    console.log(response); 
+                .catch(error => { console.log(error); })
+                .then(response => response.json() )
+                .then(data => {
+                    console.log(data); 
 
                     if (father.parentElement.parentElement.children.length === 1) {
                         location.reload();
                     } else {
                         father.parentElement.remove();
                     }
+                    
                 })
-                .catch(error => { console.log(error); });
+                
 
         });
     });

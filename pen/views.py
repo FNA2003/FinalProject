@@ -9,21 +9,17 @@ import json
 
 from .models import *
 
-# TODO: MAKE THE NAVIGATION IN THE INDEX PAGE
-
 # TODO: I'VE DONE THE FULL VIEW OF THE PROJECT PAGE, NOW WE SHOULD BE ABLE TO EDIT IT
 
 # TODO: RESPONSIVE DESIGN
 
 # TODO: WE MAY USE THE CSFR TOKEN, NOT EXEMPT THAT
 
-# TODO: UPDATE THE CONSOLE INFO WHEN FETCH, CHECK THE INDEX JS FILE
-
-# TODO: MAKE THE ACTIONS WHEN WE LOAD THE NEWEST POSTS, LIKE THE FULL PAGE AND THE LIKE BUTTON (WE CAN MAKE IT BY ADDING FUNCTIONS AND REMOVING THE ANONYMUS FUNCTIONS)
+# TODO: SHOULD WE LOAD SOME AMOUNT OF POSTS IN THE FILES AND LIKES PAGES???
 
 
 def index(request):
-    codeArr = Code.objects.all().filter(isPublic=True).order_by("id")[::-1][:10]
+    codeArr = Code.objects.all().filter(isPublic=True).order_by("id")[::-1][:6]
     try:
         lastId = codeArr[-1].id
     except IndexError:
@@ -35,8 +31,7 @@ def index(request):
         try: 
             a = Likes.objects.all().filter(codeFK__pk=i.pk).filter(likerFK__username=request.user.username)[0]
             if a.eliminated == True:
-                raise IndexError
-            
+                raise IndexError  
         except IndexError:
             liked = False
 
@@ -52,28 +47,23 @@ def index(request):
     })
 
 def getPosts(request, lastId):
-    if request.method == "GET":
-        if lastId <= 1:
-            return JsonResponse({"Bad request":"That's the last post"},status=400)
-        
+    if request.method == "GET":        
         objects = Code.objects.all().order_by("id").filter(id__lt=lastId)[::-1]
         array = []
 
-        if (len(objects) > 10):
-            objects = objects[:10]
-        elif (len(objects) < 1):
-            return JsonResponse({"OK":"No content"},status=204)
+        if (len(objects) > 6):
+            objects = objects[:6]
+        elif (len(objects) == 0):
+            return JsonResponse({"OK":"No content"},status=200)
 
         for i in objects:
-            liked = False
+            liked = True
             try:
                 a =  Likes.objects.all().filter(codeFK=i).filter(likerFK=request.user)[0]
                 if a.eliminated == True:
                     raise IndexError
-                else:
-                    liked = True
             except IndexError:
-                pass
+                liked = False
 
             array.append({ 
                 "id":i.pk,
