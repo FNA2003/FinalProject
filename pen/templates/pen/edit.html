@@ -4,10 +4,14 @@
 {% block title %}Code Editor - Pen{% endblock %}
 {% block body %}
 <link rel="stylesheet" href="{% static 'pen/edit.css' %}">
+<script src="{% static 'pen/edit.js' %}"></script>
 
 
 <div>
     <div id="buttonsContainer">
+        <div id="saveContainer">
+            <button>Save</button>
+        </div>
         <div id="window-buttons">
             <button class="window-change" id="window-HTML">HTML</button>
             <button class="window-change" id="window-CSS">CSS</button>
@@ -16,9 +20,6 @@
         <div id="zoom-buttons">
             <button class="zoom" id="zoom-in">➕</button>
             <button class="zoom" id="zoom-out">➖</button>
-        </div>
-        <div id="saveContainer">
-            <button>Save</button>
         </div>
     </div>
     <div id="root">

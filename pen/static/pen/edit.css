@@ -1,10 +1,12 @@
-#window-buttons {
+#window-buttons, #saveContainer {
     background: rgb(255,255,255);
     background: linear-gradient(90deg, rgba(255,255,255,1) 14%, 
                               rgba(250,253,11,1) 28%, rgba(20,255,251,1) 42%, 
                               rgba(16,251,13,1) 56%, rgba(230,2,245,1) 70%, 
                               rgba(230,0,2,1) 84%, rgba(1,1,238,1) 100%);
+}
 
+#window-buttons {
     display: flex;
     flex-direction: row;
     justify-content: left;
@@ -57,37 +59,52 @@
 
 
 #saveContainer {
-    left: 49.5vw;
-    position: absolute;
-    top: 82px;
+    text-align: center;
 }
 
 #saveContainer > button {
-    width: 100px;
-    height: 30px;
+    position: relative;
+    top: 15px;
 
-    background: cyan;
-    border: 1px solid black;
+    width: 150px;
+    height: 45px;
+
+    color: white;
+    background: #24ba73;
+    border: none;
     box-shadow: none;
-    border-radius: 80px;
+    border-radius: 10px;
+
+    font-size: 1.1em;
+    text-shadow: 0 0 4px black;
+    letter-spacing: 2px;
+    transition: letter-spacing .4s;
 }
 
-#saveContainer > button:hover { cursor: pointer; }
-#saveContainer > button:active { background: #00ffd5; color: white; }
+#saveContainer > button:hover { 
+    cursor: pointer; 
+    opacity: .9; 
+    letter-spacing: 5px;
+}
+#saveContainer > button:active { 
+    background: #14d179;
+    box-shadow: inset;
+}
 
 
 
 
 #root {
+    width: 100vw;
+    height: 82vh;
+
     display: grid;
     grid-template-columns: 50% 50%;
-    grid-template-rows: calc(79vh + 1px);
+    grid-template-rows: 100%;
 }
 
 .textArea-code {
     resize: none;
-    width: 100%;
-    height: 100%;
     
     border: 0;
     outline: 0;
@@ -100,4 +117,14 @@
     font-size: 26px;
 
     white-space:pre;
+}
+
+#viewArea, .textArea-code{
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+}
+
+#viewArea > span {
+    margin: 40px 20px;
 }
