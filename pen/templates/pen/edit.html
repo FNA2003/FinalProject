@@ -3,27 +3,33 @@
 
 {% block title %}Code Editor - Pen{% endblock %}
 {% block body %}
-<link rel="stylesheet" href="{% static 'pen/codeMaker.css' %}">
+<link rel="stylesheet" href="{% static 'pen/edit.css' %}">
 
 
-<div id="root">
-    <div>
-        <button class="window-change" id="window-HTML">HTML</button>
-        <button class="window-change" id="window-CSS">CSS</button>
-        <button class="window-change" id="window-JAVASCRIPT">JS</button>
+<div>
+    <div id="buttonsContainer">
+        <div id="window-buttons">
+            <button class="window-change" id="window-HTML">HTML</button>
+            <button class="window-change" id="window-CSS">CSS</button>
+            <button class="window-change" id="window-JAVASCRIPT">JS</button>
+        </div>
+        <div id="zoom-buttons">
+            <button class="zoom" id="zoom-in">➕</button>
+            <button class="zoom" id="zoom-out">➖</button>
+        </div>
+        <div id="saveContainer">
+            <button>Save</button>
+        </div>
     </div>
-    <div>
-        <button class="zoom-buttons" id="zoom-in">➕</button>
-        <button class="zoom-buttons" id="zoom-out">➖</button>
-    </div>
-    <div id="codeArea">
-        <textarea id="code-HTML" spellcheck="false" tabindex="1" placeholder="Write your HTML here...">{{ file.codeHTL }}</textarea>
-        <textarea id="code-CSS" style="display: none;" spellcheck="false" tabindex="1" placeholder="Write your CSS here...">{{ file.codeCSS }}</textarea>
-        <textarea id="code-JS" style="display: none;" spellcheck="false" tabindex="1" placeholder="Write your JS here...">{{ file.codeJS }}</textarea>
-    </div>
-    <div id="viewArea">
-        <button>Save</button>
-        <span style="display:block; margin: 20px 40px;">Your changes will be displayed here</span>
+    <div id="root">
+        <div id="codeArea">
+            <textarea class="textArea-code" id="code-HTML" style="display: block;" spellcheck="false" placeholder="Write your HTML here...">{{ file.codeHTL }}</textarea>
+            <textarea class="textArea-code" id="code-CSS" style="display: none;" spellcheck="false" placeholder="Write your CSS here...">{{ file.codeCSS }}</textarea>
+            <textarea class="textArea-code" id="code-JS" style="display: none;" spellcheck="false" placeholder="Write your JS here...">{{ file.codeJS }}</textarea>
+        </div>
+        <div id="viewArea">    
+            <span>Your changes will be displayed here</span>
+        </div>
     </div>
 </div>
 {% endblock %}
