@@ -160,6 +160,25 @@ def edit(request, fileName):
         "file":fileExist
     })
 
+
+@login_required(login_url="/login")
+def saveFile(request):
+    if (request.method == "UPDATE"):
+        jsonValues = json.loads(request.body.decode("utf-8"))
+        obj = Code.objects.all().filter(projectName=jsonValues["fileName"]).filter(userFK__username=request.user.username)
+        if len(obj) != 1:
+            return JsonResponse({"ERR":"Error when trying to locate the code file"}, status=403)
+
+        obj = obj[0]
+
+        obj.code_HTML = jsonValues["html"]
+        obj.code_CSS = jsonValues["css"]
+        obj.code_JS = jsonValues["js"] 
+
+        obj.save()
+
+        return JsonResponse({"OK":"Saved"}, status=201)
+
 @login_required(login_url="/login")
 def files(request):
     array = Code.objects.all().filter(userFK=request.user)

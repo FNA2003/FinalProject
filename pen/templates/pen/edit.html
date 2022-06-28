@@ -5,6 +5,8 @@
 {% block body %}
 <link rel="stylesheet" href="{% static 'pen/edit.css' %}">
 <script src="{% static 'pen/edit.js' %}"></script>
+<div id="token"> {% csrf_token %} </div>
+<div id="fileName" style="display: none;">{{ file.projectName }}</div>
 
 
 <div>

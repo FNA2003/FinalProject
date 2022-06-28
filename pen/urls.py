@@ -19,5 +19,6 @@ urlpatterns = [
     # API
     path("editFile", views.editFile, name="editFile"),
     path("likeFile", views.likeFile, name="likeFile"),
-    path("getPosts/<int:lastId>", views.getPosts, name="getPosts")
+    path("getPosts/<int:lastId>", views.getPosts, name="getPosts"),
+    path("saveFile", views.saveFile, name="saveFile")
 ]

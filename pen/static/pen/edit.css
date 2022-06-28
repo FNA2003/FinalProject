@@ -96,7 +96,7 @@
 
 #root {
     width: 100vw;
-    height: 82vh;
+    height: 85vh;
 
     display: grid;
     grid-template-columns: 50% 50%;
