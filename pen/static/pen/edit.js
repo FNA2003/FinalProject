@@ -151,7 +151,4 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelector("#saveContainer > button").addEventListener("click", () => {
         save(csrfToken, fileName);
     });
-
-    /* Now, 2 things, we need to fix the fullpage view and wen we hit the enter button, on the area, we should keep
-    the tabulation of the last line (it would be could if we complete the html tags when <> closing </>)  */
 });

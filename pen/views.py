@@ -9,7 +9,9 @@ import json
 
 from .models import *
 
-# TODO: ERROR WHEN WE LOAD THE FULL PAGE, WE MIGHT USE A BLOB AND AN IFRAME... I DON'T LIKE THIS, IMAGINE AN IFRAME INSIDE ANOTHER
+# TODO: THE FULL PAGE LOADS THE CODE IN HTML ENTITY... WE DON'T LIKE THAT
+
+# TODO: A TABULATION HELP WHEN WE HIT ENTER
 
 # TODO: RESPONSIVE DESIGN
 
@@ -168,9 +170,11 @@ def saveFile(request):
 
         obj = obj[0]
 
+        
+
         obj.code_HTML = jsonValues["html"]
         obj.code_CSS = jsonValues["css"]
-        obj.code_JS = jsonValues["js"] 
+        obj.code_JS = jsonValues["js"]
 
         obj.save()
 
@@ -314,7 +318,6 @@ def fullPage(request, name, creator):
         liked = False
 
     
-
     return render(request, "pen/fullPage.html", {
         "javascript":nameIn.code_JS,
         "css":nameIn.code_CSS,
