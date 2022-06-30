@@ -30,8 +30,11 @@
             <textarea class="textArea-code" id="code-CSS" style="display: none;" spellcheck="false" placeholder="Write your CSS here...">{{ file.code_CSS }}</textarea>
             <textarea class="textArea-code" id="code-JS" style="display: none;" spellcheck="false" placeholder="Write your JS here...">{{ file.code_JS }}</textarea>
         </div>
+        <div id="floatingURL">
+            <span>Click <a href="{% url 'fullPage' file.projectName user.username %}">here</a> to see the full page</span>
+        </div>
         <div id="viewArea">    
-            <span>Your changes will be displayed here</span>
+            <iframe src=""></iframe>
         </div>
     </div>
 </div>

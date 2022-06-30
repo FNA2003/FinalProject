@@ -12,7 +12,10 @@
         <link rel="stylesheet" href="{% static 'pen/fullPage.css' %}">
     </head>
     <body>
-        <span id="HOME-BUTTON"><a href="{% url 'index' %}" style="display: none;">C{}DE!</a></span>
+        {% if creator == user.username %}
+        <span id="editButton" style="display: none;"><a href="{% url 'edit' fileName %}"><i class="fa fa-pencil" aria-hidden="true"></i></a></span>
+        {% endif %}
+        <span id="HOME-BUTTON" style="display: none;"><a href="{% url 'index' %}">C{}DE!</a></span>
         <span id="authorName" style="display: none;">{{ creator }}</span>
         <span id="fileName" style="display: none;">{{ fileName }}</span>
         {% if creator != user.username and user.is_authenticated %}
@@ -25,16 +28,16 @@
             </span>
         {% endif %}
 
-        {% if javascript|length == 0 and css|length == 0 and html|length == 0 %}
+        {% if javascript_CODE|length == 0 and css_CODE|length == 0 and html_CODE|length == 0 %}
             <div style="display: none;" id="empty">
                 <img src="https://dustoffthebible.com/wp-content/uploads/2016/11/Business-cat-meme-blank.png" style="display: block; margin: auto; height: 94vh;" />
                 <h1 style="position: absolute; top: 80vh; left: 0; width: 100%; text-align: center; color: white; text-shadow: 0 0 2px black;">EMPTY</h1>
             </div>            
         {% else %}
             <div>
-                <script> {{ javascript }} </script>
-                <style> {{ css }} </style>
-                {{ html }}
+                <script>{{ javascript_CODE|safe }}</script>
+                <style>{{ css_CODE|safe }}</style>
+                <div id="htmlContainer-1">{{ html_CODE|safe }}</div>
             </div>   
         {% endif %}
     </body>

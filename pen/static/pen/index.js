@@ -46,9 +46,7 @@ function likes(button) {
     })
         .catch(error => { console.log(error); })
         .then(response => response.json())
-        .then(data => {
-            console.log(data);
-            
+        .then(data => {            
             switch(button.classList[1]){
                 case "fa-thumbs-up":
                     button.className = `fa fa-thumbs-o-up likeButton`;
@@ -60,7 +58,6 @@ function likes(button) {
                     console.error("Something is missing!");
                     setTimeout(() => { location.reload(); }, 200);
             }
-
         });      
 }
 

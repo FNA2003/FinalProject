@@ -1,3 +1,4 @@
+import code
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, HttpResponse, HttpResponseRedirect
 from django.contrib.auth import login, logout, authenticate
@@ -9,9 +10,8 @@ import json
 
 from .models import *
 
-# TODO: THE FULL PAGE LOADS THE CODE IN HTML ENTITY... WE DON'T LIKE THAT
 
-# TODO: A TABULATION HELP WHEN WE HIT ENTER
+# TODO: DOING THE GET OF THE LIKES PAGE; ERR: WHEN WE TRY TO APLY A LIKE ON A LOADED ICON
 
 # TODO: RESPONSIVE DESIGN
 
@@ -170,8 +170,6 @@ def saveFile(request):
 
         obj = obj[0]
 
-        
-
         obj.code_HTML = jsonValues["html"]
         obj.code_CSS = jsonValues["css"]
         obj.code_JS = jsonValues["js"]
@@ -182,7 +180,7 @@ def saveFile(request):
 
 @login_required(login_url="/login")
 def files(request):
-    array = Code.objects.all().filter(userFK=request.user)
+    array = Code.objects.all().filter(userFK=request.user)[::-1]
     if (request.method == "GET"):
         return render(request, "pen/files.html", {
             "projectsArray":array
@@ -286,14 +284,31 @@ def likeFile(request):
 
 @login_required(login_url="/login")
 def likesList(request):
-    a = Likes.objects.all().filter(likerFK=request.user).filter(codeFK__isPublic=True).filter(eliminated=False)
+    a = Likes.objects.all().order_by("id").filter(likerFK=request.user).filter(codeFK__isPublic=True).filter(eliminated=False)[::-1][:6]
     b = []
     for i in a:
         b.append(i.codeFK)
 
     return render(request, "pen/likes.html",{
-        "array":b
+        "array":b,
+        "lastID":a[-1].id
     })
+
+@login_required(login_url="/login")
+def getMoreLikedPosts(request, lastId):
+    if (request.method == "GET"):
+        all = Likes.objects.all().order_by("id").filter(likerFK=request.user).filter(codeFK__isPublic=True).filter(eliminated=False).filter(id__lt=lastId)[::-1][:6]
+        if len(all) == 0:
+            return JsonResponse({"ERR":"THERE IS NO MORE POSTS TO SHOW!"}, status=400)
+        b = []
+        for i in all:
+            b.append({
+                "projectName":i.codeFK.projectName,
+                "creator":i.likerFK.username,
+                "id":i.id
+            })
+        
+        return JsonResponse({"array":b}, status=200)
 
 
 def fullPage(request, name, creator):
@@ -316,12 +331,11 @@ def fullPage(request, name, creator):
                 raise IndexError
     except IndexError:
         liked = False
-
     
     return render(request, "pen/fullPage.html", {
-        "javascript":nameIn.code_JS,
-        "css":nameIn.code_CSS,
-        "html":nameIn.code_HTML,
+        "javascript_CODE":nameIn.code_JS,
+        "css_CODE":nameIn.code_CSS,
+        "html_CODE":nameIn.code_HTML,
         "creator":creator,
         "liked":liked,
         "fileName":name

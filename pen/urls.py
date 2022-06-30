@@ -20,5 +20,6 @@ urlpatterns = [
     path("editFile", views.editFile, name="editFile"),
     path("likeFile", views.likeFile, name="likeFile"),
     path("getPosts/<int:lastId>", views.getPosts, name="getPosts"),
-    path("saveFile", views.saveFile, name="saveFile")
+    path("getPostsLikes/<int:lastId>", views.getMoreLikedPosts, name="getPostsLikes"),
+    path("saveFile", views.saveFile, name="saveFile"),
 ]

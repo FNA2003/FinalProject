@@ -20,6 +20,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
         document.querySelector("#likeButtonContainer").style.display = "none";
         document.querySelector("#empty").style.display = "block";
+        document.querySelector("#HOME-BUTTON").style.cssText = `display: block;
+                                                                background: transparent;`;
+    } else {
+        document.querySelector("#HOME-BUTTON").style.display = "block";
+        document.querySelector("#editButton").style.display = "block";
     }
 
 
@@ -66,7 +71,6 @@ document.addEventListener("DOMContentLoaded", () => {
         /* pass */
     }    
     
-    document.querySelector("#HOME-BUTTON a").style.display = "block";
-    console.clear();
+    
 });
 

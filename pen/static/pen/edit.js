@@ -12,6 +12,7 @@ function zoomButtons(element) {
     });
 }
 
+
 function windowButtons(element) {
     element.addEventListener("click", () => {
         document.querySelectorAll(".textArea-code").forEach(area => {
@@ -40,6 +41,9 @@ function windowButtons(element) {
         }
     });
 }
+
+
+
 
 function tabulation() {
     event.preventDefault();
@@ -95,6 +99,54 @@ function complete() {
     }
 }
 
+function rememberTabulation() {
+    document.querySelectorAll(".textArea-code").forEach(area => {
+        if(window.getComputedStyle(area).getPropertyValue("display") === "block") {
+            event.preventDefault();
+
+            let upToEnter = area.value.slice(0, area.selectionStart).split("").reverse()
+            let spacesCount = 0;
+
+            for (let i = 0; i < upToEnter.length; i++) {
+                if (upToEnter[i] === "\n") {
+                    let currentLine = upToEnter.slice(0, i).reverse();
+                    for (i of currentLine) {
+                        if (i === " ") {
+                            spacesCount ++;
+                        } else {
+                            break;
+                        }
+                    }
+                    break;
+                }
+            }
+
+            let newValue = (area.value.slice(0, area.selectionEnd) + "\n" + (" ".repeat(spacesCount))) + (area.value.slice(area.selectionEnd, area.value.length));
+            area.value = newValue;
+            area.selectionEnd ++;
+        }
+    })
+}
+
+function refreshView() {
+    let html = document.querySelector("#code-HTML").value;
+    let css = document.querySelector("#code-CSS").value;
+    let js = document.querySelector("#code-JS").value;
+
+    
+    const cssFile = new Blob([css], {type:"text/css;charset=utf8"});
+    const jsFile = new Blob([js], {type:"text/js;charset=utf8"});
+
+    html += `<link rel='stylesheets' src='${URL.createObjectURL(cssFile)}'><script src='${URL.createObjectURL(jsFile)}'></script>`;
+    if (html.includes("<!DOCTYPE html>") === false){
+        html = "<!DOCTYPE html>" + html;
+    }
+    
+    let htmlFile = new Blob([html], {type:"text/html;charset=utf8"});
+
+    document.querySelector("#viewArea > iframe:first-child").src = URL.createObjectURL(htmlFile);
+}
+
 
 function keys() {
     if (document.activeElement.classList[0] === "textArea-code") {
@@ -102,7 +154,12 @@ function keys() {
             tabulation();
         } else if(event.keyCode === 50 || event.keyCode === 222 || event.keyCode === 56 || event.keyCode === 174){
             complete();
+        } else if (event.keyCode === 13) {
+            rememberTabulation();
         }
+
+        refreshView();
+
     }
 }
 
@@ -135,6 +192,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const csrfToken = document.querySelector("#token > input").value;
     const fileName = document.querySelector("#fileName").innerHTML;
 
+    refreshView();
 
     document.querySelectorAll(".zoom").forEach(button => {
         zoomButtons(button);
@@ -150,5 +208,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.querySelector("#saveContainer > button").addEventListener("click", () => {
         save(csrfToken, fileName);
-    });
+    });   
 });

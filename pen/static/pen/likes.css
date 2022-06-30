@@ -59,6 +59,8 @@
     display: flex;
     flex-direction: column;
 
+    overflow-y: auto;
+
     padding: 15px 30px;
 
     background: rgb(230, 228, 228);
