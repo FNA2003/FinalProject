@@ -11,15 +11,12 @@ import json
 from .models import *
 
 
-# TODO: DOING THE GET OF THE LIKES PAGE; ERR: WHEN WE TRY TO APLY A LIKE ON A LOADED ICON
+# TODO: MAYBE WE DON'T NEED TO REFRESH THE PAGE WHEN WE HIDE/UNHIDE A FILE IN "FILES" PAGE
 
 # TODO: RESPONSIVE DESIGN
 
 # TODO: WE MAY USE THE CSFR TOKEN, NOT EXEMPT THAT
 
-# TODO: SHOULD WE LOAD SOME AMOUNT OF POSTS IN THE FILES AND LIKES/FILES PAGES???
-
-# TODO: SHOULD WE LET THE CREATOR GO TO THE EDIT PAGE FROM THE FULL PAGE??
 
 def index(request):
     codeArr = Code.objects.all().filter(isPublic=True).order_by("id")[::-1][:6]
@@ -180,10 +177,12 @@ def saveFile(request):
 
 @login_required(login_url="/login")
 def files(request):
-    array = Code.objects.all().filter(userFK=request.user)[::-1]
+    array = Code.objects.all().order_by("id").filter(userFK=request.user)[::-1][:6]
+    
     if (request.method == "GET"):
         return render(request, "pen/files.html", {
-            "projectsArray":array
+            "projectsArray":array,
+            "lastId":array[-1].id
         })
 
     elif (request.method == "POST"):
@@ -219,7 +218,25 @@ def files(request):
                 "projectsArray":array,
                 "message":"You have another file with the same name!" 
             })
+
+
+@login_required(login_url="/login")
+def getPostsFiles(request, lastId):
+    if request.method == "GET":
+        a = Code.objects.all().order_by("id").filter(userFK=request.user).filter(id__lt=lastId)[::-1][:6]
+        if (len(a) == 0):
+            return JsonResponse({"ERR":"THERE IS NO MORE POSTS TO SHOW"}, status=400)
+        b = []
+        for i in a:
+            b.append({
+                "projectName":i.projectName,
+                "creator":i.userFK.username,
+                "id":i.id,
+                "isPublic":i.isPublic
+            })
         
+        return JsonResponse({"array":b}, status=200)
+
 @login_required(login_url="/login")
 def editFile(request):
     if (request.method == "UPDATE"):
@@ -304,7 +321,7 @@ def getMoreLikedPosts(request, lastId):
         for i in all:
             b.append({
                 "projectName":i.codeFK.projectName,
-                "creator":i.likerFK.username,
+                "creator":i.codeFK.userFK.username,
                 "id":i.id
             })
         

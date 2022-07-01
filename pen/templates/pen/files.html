@@ -4,60 +4,71 @@
 {% block title %}Files - Pen{% endblock %}
 
 {% block body %}
-
 <link rel="stylesheet" href="{% static 'pen/files.css' %}">
 <script src="{% static 'pen/files.js' %}"></script>
 
-<div id="mainHolder">
+<div id="lastId" style="display: none;">{{ lastId }}</div>
+
+      
+<div id="body-firstContainer">
     <div>
         {% if message %}
-        <div id="messageHolder">
-            <div> <span>{{ message }}</span> </div>
-        </div>
+        <span id="message">{{ message }}</span>
         {% endif %}
-        <div id="filesHolder">
-            <div id="newFile-Holder">
-                <button>New file</button>
+        <div id="projectsContainer">
+            <div>
+                <div>
+                    <h2>Files</h2>
+                    <hr>
+                    <div id="prof">
+                        <img src="https://icons.veryicon.com/png/o/miscellaneous/two-color-icon-library/user-286.png" />
+                        <h3>{{ user.username }}</h3>
+                    </div>
+                </div>
+                <div id="showForm">
+                    <i class="fa fa-arrow-down" aria-hidden="true"></i>
+                </div>                        
+                <div id="formContainer" style="display: none;">
+                    <form method="post">
+                        <div class="formDivider" id="csrfHolder"> {% csrf_token %} </div>
+                        <div class="formDivider">
+                            <label for="form-fileName">File Name:</label>
+                            <input type="text" name="fileName" id="form-fileName" maxlength="36" minlength="4" autocomplete="off" required />
+                        </div>
+                        <div class="formDivider">
+                            <label for="form-isPublic">You want the project to be public?</label>
+                            <input type="checkbox" name="isPublic" id="form-isPublic" checked  />
+                        </div class="formDivider">
+                        <div> <input type="submit" value="Create" /> </div>
+                    </form>
+                </div>
             </div>
             <div>
                 {% if projectsArray %}
                     {% for i in projectsArray %}
-                    
-                    <div class="projectHolder">
-                        <iframe src="{% url 'fullPage' i.projectName i.userFK.username %}" frameborder="0" scrolling="no" sandbox></iframe>
-                        <input type="hidden" value="{{ i.id }}" />
-                        <h3>{{ i.projectName }}</h3>
-                        <div class="icons"> 
-                            <a href="{% url 'fullPage' i.projectName i.userFK.username %}"><i class="fa fa-external-link" aria-hidden="true"></i></a>
-                            <a href="{% url 'edit' i.projectName %}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                            <i class="fa fa-trash-o" aria-hidden="true"></i>
-                            {% if i.isPublic == False %}
-                            <i class="fa fa-eye-slash" aria-hidden="true"></i>
-                            {% else %}
-                            <i class="fa fa-eye" aria-hidden="true"></i>
-                            {% endif %}
+                    <div class="projectContainer">
+                        <div><iframe src="{% url 'fullPage' i.projectName i.userFK.username %}" scrolling="no" sandbox></iframe></div>
+                        <div>
+                            <h4><strong>{{ i.projectName }}</strong></h4>
+                            <span>{{ i.userFK.username }}</span>
+                            <div class="buttonsContainer">
+                                <a href="{% url 'fullPage' i.projectName i.userFK.username %}"><i class="fa fa-external-link" aria-hidden="true"></i></a>
+                                <a href="{% url 'edit' i.projectName %}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                {% if i.isPublic == False %}
+                                <i class="fa fa-eye-slash" aria-hidden="true"></i>
+                                {% else %}
+                                <i class="fa fa-eye" aria-hidden="true"></i>
+                                {% endif %}
+                            </div>
+                            <input type="hidden" value="{{ i.id }}" />
                         </div>
                     </div>
-
                     {% endfor %}
                 {% else %}
-                    <div style="margin: 20px 10px;">You don't have any file right now</div>
+                    <span>You don't have any file yet</span>
                 {% endif %}
             </div>
-        </div>
-        <div id="formHolder">
-            <form method="post">
-                <div class="formDivider" id="csrfHolder"> {% csrf_token %} </div>
-                <div class="formDivider">
-                    <div> <label for="form-fileName">File Name:</label> </div>
-                    <div> <input type="text" name="fileName" id="form-fileName" maxlength="36" minlength="4" autocomplete="off" required /> </div>
-                </div>
-                <div class="formDivider">
-                    <div> <label for="form-isPublic">You want the project to be public?</label> </div>
-                    <div> <input type="checkbox" name="isPublic" id="form-isPublic" checked  /> </div>
-                </div class="formDivider">
-                <div> <input type="submit" value="Create" /> </div>
-            </form>
         </div>
     </div>
 </div>

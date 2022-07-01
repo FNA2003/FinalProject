@@ -1,163 +1,172 @@
-#mainHolder > div{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+#message {
+    position: absolute;
+    left: 2vw;
+    bottom: 20vh;
+    width: 25vw;
+    background: red;
+    padding: 2px 4px;
+    border-radius: 8px;
+    border: 1px solid white;
+    box-shadow: 0 0 30px lightcoral;
+    color: white;
 }
 
-#filesHolder {
-    width: 80%;
-    margin: 5vh 2vw;
-}
 
-#newFile-Holder {
-    display: flex;
-    justify-content: center;
-    align-items: center;
 
-    position: fixed;
-    top: calc(13vh + 1px);
-    right: 10px;
-
-    background: transparent;
-    border: none;
-
-    width: 160px;
-    height: 50px;
-
-}
-#newFile-Holder button {
+#Img-noArr {
     width: 100%;
-    height: 100%;
+    height: 60vh;
+
+    object-fit: cover;
 }
 
-#newFile-Holder button:hover { cursor: pointer; }
+#H3-noArr {
+    color: #fff;
+    text-align: center;
+    text-shadow: 0 0 4px black;
 
-#filesHolder > div:nth-child(2) {
-    border: 1px solid gray;
-    background: #fff;
+    position: relative;
+    bottom: 5vh;
 }
 
-.projectHolder {
+#H3-noArr a {
+    color:#8e80e2;
+    text-decoration: none;
+
+    transition: font-size .3s;
+}
+
+#H3-noArr a:hover {
+    font-size: 1.08em;
+    text-decoration: underline;
+}
+
+
+
+
+#projectsContainer {
     display: grid;
-    grid-template-columns: 40% 58% 2%;
-    grid-template-areas: auto;
-
-    margin: 40px 15px;
-    padding: 10px 6px;
-    background: #858a94a9;
+    grid-template-columns: 30% 70%;
+    grid-template-rows: calc(91vh + 8px);
 }
 
-.projectHolder iframe { 
-    background: #fff; 
-    border: 1px solid black;
-    margin: auto;
-    width: 90%;
-    height: 100%;
-}
+#projectsContainer > div:first-child {
+    padding: 40px 20px;
+    height: 60%;
 
-.projectHolder h4 {
-    overflow: hidden;
-    text-overflow: clip;
-}
-
-.icons {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
 }
-.icons a{ color: #000; }
-.icons a:hover { color: black!important; cursor: auto; }
-.icons i:hover { cursor: pointer; }
 
-.fa-trash-o:hover { color: #c92f2f; }
-.fa-pencil:hover { color: #6f2; }
-.fa-external-link:hover { color: blue; }
-.fa-eye-slash:hover, .fa-eye:hover { color: yellow; }
-
-
-#formHolder {
-    display: none;
-    flex-direction: column;
-    justify-content: center;
+#prof {
+    display: grid;
+    grid-template-columns: 20% 75%;
+    grid-template-rows: auto;
     align-items: center;
-
-    position: fixed;
-    top: 40vh;
-
-    width: 350px;
-    height: 200px;   
-
-    background: #27275a;
-    color: #fff;
-    border: 1px solid gray;
-    border-radius: 10px;
-
-    animation-name: appearForm;
-    animation-duration: .7s;
-    animation-fill-mode: forwards;
-    animation-timing-function: linear;
+    column-gap: 2.5%;
 }
 
-.formDivider { margin: 14px 0; }
+#prof img { width: 100%; }
 
-#formHolder input[type="submit"], #formHolder input[type="text"] {
-    width: 100%;
+
+#projectsContainer > div:nth-child(2) {
+    display: flex;
+    flex-direction: column;
+
+    overflow-y: auto;
+
+    padding: 15px 30px;
+
+    background: rgb(230, 228, 228);
 }
 
-#formHolder input[type="submit"]:hover { cursor: pointer; }
+iframe { border: 1px solid whitesmoke; width: 90%; }
 
-@keyframes appearForm {
-    from { height: 0; overflow: hidden; }
-    to { height: 240px; overflow: hidden; }
+.projectContainer {
+    margin: 5px 0;
+    padding: 4px 0;
+    border-bottom: 1px solid gray;
+
+    display: grid;
+    grid-template-columns: 40% 60%;
+    grid-template-rows: auto;
 }
 
-#messageHolder {
-    position: relative;
-    top: 20px;
-
-    border: 1px solid red;
-    border-radius: 8px;
-    box-shadow: 0 0 10px red;
-
-    text-align: center;
-
-    width: 80%;
-
-    background: #ef5350;
-    color: #fff;
-}
-
-#nameChange-holder {    
-    position: absolute;
-    top: 25vh;
-
-    width: 500px;
-    height: 300px;
-
-    padding: 10px 5px;
-
-    background: #fff;
-    border: 1px solid gray;
-    border-radius: 8px;
-}
-
-#nameChange-holder > form {
+.projectContainer > div:nth-child(2) { 
     display: grid;
     grid-template-columns: auto;
-    grid-template-rows: 20% auto 20%;
-    row-gap: 16px;
+    grid-template-rows: 40% 35% 25%;
+}
+
+.projectContainer > div:nth-child(2) h4 { font-size: 1.2em; }
+.projectContainer > div:nth-child(2) span { color:gray; font-size: .9em; }
+
+.buttonsContainer {
+    display: grid;
+    grid-template-columns: 5% 5% 5% 5%;
+    column-gap: 1%;
+    align-items: center;    
+}
+
+.buttonsContainer a:hover { cursor: auto; }
+.buttonsContainer span i, .buttonsContainer a { color: black; }
+.buttonsContainer i { transition: font-size .4s; }
+
+.buttonsContainer i:hover { 
+    cursor: pointer; 
+    color: rgb(60, 236, 178); 
+    font-size: 1.2em; 
+    text-shadow: 0 0 2px black;
+}
 
 
+
+.formDivider, form input[type="submit"] {
+    margin: 4px 6px;
+}
+
+.formDivider label {
+    display: block;
+    color: rgb(61, 61, 61);
+}
+
+.formDivider input[type="text"] {
+    border: 0;
+    outline: 0;
+    border-bottom: 1px solid #4887ff;
+    box-shadow: none;    
+    background: #fff;
+
+
+    padding: 2px 4px;
+    width: 300px;    
+}
+
+.formDivider input[type="text"]:focus {
+    background: linear-gradient(180deg, #fff 65%, #81adff);
+}
+
+#formContainer input[type="submit"] {
+    width: 100px;
+}
+
+#formContainer {
+    margin-left: 20%;
+    border-radius: 6px;
+    background: rgb(230, 228, 228);
+    width: max-content;
+}
+
+#showForm {
     width: 100%;
-    height: 100%;
+    background: lightblue;
+    text-align: center;
+    border-radius: 8px;
+    border: 1px solid gray;
+
+    transition: color .15s;
 }
 
-.formArea {
-    width: 100%;
-    height: 100%;
-}
-
-#nameChange {
-    resize: none;
-}
+#showForm:hover { cursor: pointer; }
+#showForm:active { border: 0; color: white; }
