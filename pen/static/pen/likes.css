@@ -104,3 +104,21 @@ iframe { border: 1px solid whitesmoke; width: 90%; }
     font-size: 1.2em; 
     text-shadow: 0 0 2px black;
 }
+
+@media (max-width: 800px) {
+    #projectsContainer  {
+        grid-template-columns: auto;
+        grid-template-rows: 15% 80%;
+    }
+    #projectsContainer > div:nth-child(2) {
+        height: 58vh;
+        overflow-y: scroll;
+    }
+    #projectsContainer > div:first-child {
+        position: relative;
+        top: 40px;
+    }
+    .buttonsContainer {
+        grid-template-columns: auto auto auto;
+    }
+}

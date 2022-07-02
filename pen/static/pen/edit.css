@@ -1,3 +1,7 @@
+html {
+    overflow: hidden;
+}
+
 #window-buttons, #saveContainer {
     background: rgb(255,255,255);
     background: linear-gradient(90deg, rgba(255,255,255,1) 14%, 
@@ -79,6 +83,7 @@
     text-shadow: 0 0 4px black;
     letter-spacing: 2px;
     transition: letter-spacing .4s;
+    z-index: 10000;
 }
 
 #saveContainer > button:hover { 
@@ -146,3 +151,36 @@
     text-decoration: none; 
 }
 #floatingURL a:hover { text-decoration: underline; }
+
+
+@media (max-width:900px) {
+    #saveContainer > button {
+        width: 90px;
+    }
+    #saveContainer > button:hover {
+        letter-spacing: 3px;
+    }
+    #root {
+        height: 80vh;
+        grid-template-columns: auto;
+        grid-template-rows: 50% 50%;
+    }
+    #zoom-buttons {
+        top: 45vh;
+        left: 92vw;
+    }
+}
+
+@media (max-width:500px) {
+    /* Save button and full page url */
+    #floatingURL {
+        display: none;
+    }
+    #saveContainer {
+        text-align: right;
+        padding-right: 10px;
+    }
+    #saveContainer button {
+        top: 30px;
+    }
+}

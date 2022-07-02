@@ -1,3 +1,7 @@
+html {
+    overflow-y: hidden;
+}
+
 #mainHolder {
     background: #dedede;
     height: calc(91vh + 8px);
@@ -57,3 +61,26 @@
 #secondBlock span a { color: #4882f6; }
 
 #secondBlock span a:hover { color: #4b48f6; }
+
+
+@media (max-width: 900px) {
+    #firstBlock, #secondBlock {
+        width: 90vw;
+    }
+}
+
+@media (max-width: 500px) {
+    #firstBlock div:nth-child(2) h5 {
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    #firstBlock {
+        height: 15vh;
+        grid-template-columns: 30% 70%;
+    }
+    #firstBlock > div:first-child {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}

@@ -104,7 +104,7 @@ iframe { border: 1px solid whitesmoke; width: 90%; }
 
 .buttonsContainer {
     display: grid;
-    grid-template-columns: 5% 5% 5% 5%;
+    grid-template-columns: auto auto auto auto 40%;
     column-gap: 1%;
     align-items: center;    
 }
@@ -170,3 +170,56 @@ iframe { border: 1px solid whitesmoke; width: 90%; }
 
 #showForm:hover { cursor: pointer; }
 #showForm:active { border: 0; color: white; }
+
+
+@media (max-width: 1450px) {
+    #formContainer {
+        position: relative;
+        right: 50px;
+        width: 100%;
+    }
+    #formContainer input[type="text"] {
+        width: 100%;
+    }
+}
+
+@media (max-width: 800px) {
+    #projectsContainer {
+        grid-template-columns: auto;
+        grid-template-rows: 30% 70%;
+    }
+    #formContainer {
+        position: relative;
+        top: 20px;
+        right: -60px;
+        width: max-content;
+    }
+    #formContainer input[type="text"] {
+        width: 300px; 
+    }
+    #projectsContainer > div:first-child {
+        top: 30px;
+    }
+    #projectsContainer > div:nth-child(2) {
+        height: 59vh;
+        overflow-y: auto;
+    }
+}
+
+@media (max-width: 600px) {
+    .buttonsContainer {
+        grid-template-columns: auto auto auto auto 20%;
+    }
+    #formContainer {
+        right: 30px;
+    }
+}
+
+@media (max-width: 400px) {
+    .buttonsContainer {
+        grid-template-columns: auto auto auto auto;
+    }
+    #formContainer {
+        right: 50px;
+    }
+}

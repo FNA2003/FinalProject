@@ -139,3 +139,23 @@ form {
     from { height: 0; }
     to { height: 25px; box-shadow: 0 0 10px #e57373; }
 }
+
+@media (max-width: 600px) {
+    form {
+        width: 90vw;
+        height: 40vh;
+    }
+    .form-iconHolder {
+        border-radius: 50% 25%;
+    }
+}
+
+@media (max-width: 400px) {
+    .formSubmit {
+        position: relative;
+        top: 50px;
+    }
+    .formSubmit input {
+        width: 90px;
+    }
+}
