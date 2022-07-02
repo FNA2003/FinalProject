@@ -1,9 +1,7 @@
-import code
-from django.http import HttpResponse, JsonResponse
-from django.shortcuts import render, HttpResponse, HttpResponseRedirect
+from django.http import JsonResponse
+from django.shortcuts import render, HttpResponseRedirect
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
-from django.views.decorators.csrf import csrf_exempt
 from django.urls import reverse
 from django.db import IntegrityError
 import json
@@ -15,8 +13,7 @@ from .models import *
 
 # TODO: RESPONSIVE DESIGN
 
-# TODO: WE MAY USE THE CSFR TOKEN, NOT EXEMPT THAT
-
+# TODO: IMPROVE THE LOOKING OF THE CODE AND IMPROVE THE PERFORMANCE OF ALL OF THE PAGES
 
 def index(request):
     codeArr = Code.objects.all().filter(isPublic=True).order_by("id")[::-1][:6]
@@ -58,11 +55,14 @@ def getPosts(request, lastId):
 
         for i in objects:
             liked = True
-            try:
-                a =  Likes.objects.all().filter(codeFK=i).filter(likerFK=request.user)[0]
-                if a.eliminated == True:
-                    raise IndexError
-            except IndexError:
+            if request.user.username != "":
+                try:
+                    a =  Likes.objects.all().filter(codeFK=i).filter(likerFK=request.user)[0]
+                    if a.eliminated == True:
+                        raise IndexError
+                except IndexError:
+                    liked = False
+            else:
                 liked = False
 
             array.append({ 
@@ -263,7 +263,6 @@ def editFile(request):
 
         return JsonResponse({"OK":"MODIFIED"}, status=200)
 
-@csrf_exempt
 @login_required(login_url="/login")
 def likeFile(request):
     jsonObject = json.loads(request.body.decode("UTF-8"))
@@ -305,10 +304,14 @@ def likesList(request):
     b = []
     for i in a:
         b.append(i.codeFK)
+    try:
+        last = a[-1].id
+    except IndexError:
+        last = 0
 
     return render(request, "pen/likes.html",{
         "array":b,
-        "lastID":a[-1].id
+        "lastID":last
     })
 
 @login_required(login_url="/login")

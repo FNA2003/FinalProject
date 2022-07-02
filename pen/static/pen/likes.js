@@ -1,4 +1,4 @@
-function likes(b) {
+function likes(b, token) {
     const father = b.parentElement.parentElement.parentElement;
     const author = father.children[1].innerHTML;
     const name = father.children[0].children[0].innerHTML;
@@ -6,6 +6,7 @@ function likes(b) {
     fetch("/likeFile", {
         method:"POST",
         headers:{
+            "X-CSRFToken":token,
             "Content-type":"application/json; charset=UTF-8"
         },
         body: JSON.stringify({
@@ -26,16 +27,17 @@ function likes(b) {
 
 
 document.addEventListener("DOMContentLoaded", () => {
-    scroll(0,0)
+    let lastPosition = 0;
+    const token = document.querySelector("#token").children[0].value;
     let lastID = document.querySelector("#lastID");
     lastID.remove();
     lastID = lastID.innerHTML;
-    let lastPosition = 0;
-
-
+    
+    scroll(0,0)
+    
    document.querySelectorAll(".likeButton").forEach(button => {
         button.addEventListener("click", () => {
-            likes(button);
+            likes(button, token);
         });        
         button.dataset["check"] = true;
    });
@@ -82,7 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     document.querySelectorAll(".likeButton").forEach(button => {
                         if (button.dataset["check"] === undefined) {
                             button.addEventListener("click", () => {
-                                likes(button);
+                                likes(button, token);
                             });
                             button.dataset["check"] = true;
                         }

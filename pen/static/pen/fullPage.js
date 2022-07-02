@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+    const token = document.querySelector("#token").children[0].value;
     let name = document.querySelector("#fileName").innerHTML;
     let author = document.querySelector("#authorName").innerHTML;
 
@@ -35,6 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
             fetch("/likeFile", {
                 method:"POST",
                 headers:{
+                    "X-CSRFToken":token,
                     "Content-type":"application/json; charset=UTF-8"
                 },
                 body: JSON.stringify({

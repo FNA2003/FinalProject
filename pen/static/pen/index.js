@@ -30,13 +30,14 @@ function fullScreen(button) {
     }
 }
 
-function likes(button) {
+function likes(button, token) {
     let name = button.parentElement.parentElement.children[2].children[1].children[0].innerHTML;
     let author = button.parentElement.parentElement.children[2].children[2].children[0].innerHTML;
 
     fetch("/likeFile", {
         method:"POST",
         headers:{
+            "X-CSRFToken":token,
             "Content-type":"application/json; charset=UTF-8"
         },
         body: JSON.stringify({
@@ -65,10 +66,10 @@ function likes(button) {
 
 document.addEventListener("DOMContentLoaded", () => {
     let userNAME = undefined;
-    
+    const token = document.querySelector("#info > span:nth-child(3)").children[0].value;
     let lastId = document.querySelector("#lastId").children[0].innerHTML;
     lastId = parseInt(lastId);
-    
+
     if (document.querySelector("#info > span:first-child").innerHTML === "True") {
         userNAME = document.querySelector("#info > span:nth-child(2)").innerHTML;
     }
@@ -93,7 +94,7 @@ document.addEventListener("DOMContentLoaded", () => {
         
         button.addEventListener("click", () => {   
 
-            likes(button);
+            likes(button, token);
 
         });
         button.dataset["hasEvent"] = true;
@@ -168,7 +169,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             document.querySelectorAll(".likeButton").forEach(b => {
                                 if (b.dataset["hasEvent"] === undefined) {
                                     b.addEventListener("click", () => {
-                                        likes(b);                                    
+                                        likes(b, token);                                    
                                     });
                                     b.dataset["hasEvent"] = true;
                                 }

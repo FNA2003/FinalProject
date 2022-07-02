@@ -11,6 +11,7 @@
 <div id="info" style="display: none;">
     <span>{{ user.is_authenticated }}</span>
     <span>{{ user.username }}</span>
+    <span>{%csrf_token%}</span>
 </div>
 
 <div id="body-content">
