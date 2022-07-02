@@ -85,3 +85,29 @@ h1, h2, h3, h4, h5, h6 {
     #3c10ff 0 0 30px;
 
 }
+
+@media (max-width:750px) {
+    .navbar-link > span, #user-logout a span {
+        display: none;
+    }
+    #user-logout a{
+        color: #5f5f5f;
+    }
+}
+
+@media (max-width: 450px) {
+    #user-profile {
+        background-color: transparent;
+        width: fit-content;
+        color: #5f5f5f;
+        border: none;
+        box-shadow: none;
+    }
+    #user-profile:hover {
+        background: transparent;
+        color: #32b3ff;
+    }
+    #user-profile span {
+        display: none;
+    }
+}

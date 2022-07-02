@@ -183,3 +183,29 @@
 }
 
 #lastId { display: none; }
+
+@media (max-width: 600px) {
+    .footer-link span {
+        display: none;
+    }
+    
+}
+@media (max-width: 700px) {
+    @keyframes fullScreen {
+        from {
+            position: inherit;
+            width: 450px;
+            height: 500px;
+        }   
+        to {
+            position: absolute;
+            top: 0;
+            width: 90vw;
+            height: 65vh;
+        }
+    }
+
+    .footer-link span:hover {
+        letter-spacing: 1px;
+    }
+}

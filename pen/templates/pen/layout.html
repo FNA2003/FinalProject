@@ -21,17 +21,17 @@
         <nav>
             <ul>
                 <li id="comp-tag"><span>C{}DE!</span></li>
-                <li><a class="navbar-link" href="{% url 'index' %}">Home <i class="fa fa-home" aria-hidden="true"></i></a></li>
+                <li><a class="navbar-link" href="{% url 'index' %}"><span>Home</span> <i class="fa fa-home" aria-hidden="true"></i></a></li>
 
                 {% if user.is_authenticated %}
-                    <li><a class="navbar-link" href="{% url 'files' %}">Files <i class="fa fa-files-o" aria-hidden="true"></i></a></li>
-                    <li><a class="navbar-link" href="{% url 'likes' %}">Likes list <i class="fa fa-thumbs-up" aria-hidden="true"></i></a></li>
-                    <li id="user-logout"><a href="{% url 'logout' %}">Log out <i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
-                    <li><a href="{% url 'profile' %}" id="user-profile">Profile <i class="fa fa-user" aria-hidden="true"></i></a></li>
+                    <li><a class="navbar-link" href="{% url 'files' %}"><span>Files</span> <i class="fa fa-files-o" aria-hidden="true"></i></a></li>
+                    <li><a class="navbar-link" href="{% url 'likes' %}"><span>Likes list</span> <i class="fa fa-thumbs-up" aria-hidden="true"></i></a></li>
+                    <li id="user-logout"><a href="{% url 'logout' %}"><span>Log out</span> <i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
+                    <li><a href="{% url 'profile' %}" id="user-profile"><span>Profile</span> <i class="fa fa-user" aria-hidden="true"></i></a></li>
         
                 {% else %}
-                    <li><a class="navbar-link" href="{% url 'register' %}">Register <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>
-                    <li><a class="navbar-link" href="{% url 'login' %}">Log in <i class="fa fa-sign-in" aria-hidden="true"></i></a></li>
+                    <li><a class="navbar-link" href="{% url 'register' %}"><span>Register</span> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>
+                    <li><a class="navbar-link" href="{% url 'login' %}"><span>Log in</span> <i class="fa fa-sign-in" aria-hidden="true"></i></a></li>
                 {% endif %}
             </ul>
         </nav>
