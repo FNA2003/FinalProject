@@ -12,13 +12,15 @@
         <link rel="stylesheet" href="{% static 'pen/fullPage.css' %}">
     </head>
     <body>
-        {% if creator == user.username %}
-        <span id="editButton" style="display: none;"><a href="{% url 'edit' fileName %}"><i class="fa fa-pencil" aria-hidden="true"></i></a></span>
-        {% endif %}
-        <span id="HOME-BUTTON" style="display: none;"><a href="{% url 'index' %}">C{}DE!</a></span>
-        <span id="authorName" style="display: none;">{{ creator }}</span>
-        <span id="fileName" style="display: none;">{{ fileName }}</span>
-        <span id="token">{%csrf_token%}</span>
+        <div>
+            {% if creator == user.username %}
+            <span id="editButton" style="display: none;"><a href="{% url 'edit' fileName %}"><i class="fa fa-pencil" aria-hidden="true"></i></a></span>
+            {% endif %}
+            <span id="HOME-BUTTON" style="display: none;"><a href="{% url 'index' %}">C{}DE!</a></span>
+            <span id="authorName" style="display: none;">{{ creator }}</span>
+            <span id="fileName" style="display: none;">{{ fileName }}</span>
+            <span id="token">{%csrf_token%}</span>
+        </div>
         {% if creator != user.username and user.is_authenticated %}
             <span id="likeButtonContainer" style="display: none;">
                 {% if liked == False %}

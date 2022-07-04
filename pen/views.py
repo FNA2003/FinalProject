@@ -288,6 +288,8 @@ def edit(request, fileName):
     if request.user.username == "" or len(fileExist) != 1:
         return HttpResponseRedirect(reverse("files"))
 
+    fileExist = fileExist[0]
+
     # So we can return the template
     return render(request, "pen/edit.html", {
         "file": fileExist
@@ -354,6 +356,7 @@ def likeFile(request):
     project = Code.objects.all().filter(userFK__username=author).filter(projectName=name)
     if len(project) != 1:
         return JsonResponse({"ERR": "Project not found!"}, status=400)
+    project = project[0]
 
     # Later, we will store the querySet where it should be the like object
     likeObject = Likes.objects.all().filter(codeFK__pk=project.pk).filter(likerFK__username=request.user.username)
@@ -404,11 +407,14 @@ def getPosts(request, lastId):
 
     for i in objects:
         # Here, we are looking if the requester liked the current file
-        a = Likes.objects.all().filter(codeFK=i).filter(likerFK=request.user)
-        if len(a) == 0 or a[0].eliminated == True:
-            liked = False
+        if request.user.username != "":
+            a = Likes.objects.all().filter(codeFK=i).filter(likerFK=request.user)
+            if len(a) == 0 or a[0].eliminated == True:
+                liked = False
+            else:
+                liked = True
         else:
-            liked = True
+            liked = False
         
         array.append({ 
             "id": i.pk,
