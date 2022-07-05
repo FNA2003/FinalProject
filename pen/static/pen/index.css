@@ -6,6 +6,7 @@
 
     background-image: url("https://images2.alphacoders.com/698/698137.jpg");
     background-repeat: no-repeat;
+    background-position: 50% 100%;
 
     animation-name: showBackground;
     animation-timing-function: ease-in;
@@ -207,5 +208,14 @@
 
     .footer-link span:hover {
         letter-spacing: 1px;
+    }
+
+    .foot {
+        justify-content: space-evenly
+    }
+    
+    
+    .footer-link {
+        margin: 0;
     }
 }
