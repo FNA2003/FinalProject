@@ -1,6 +1,4 @@
-html {
-    overflow: hidden;
-}
+
 
 #window-buttons, #saveContainer {
     background: rgb(255,255,255);
@@ -159,15 +157,6 @@ html {
     }
     #saveContainer > button:hover {
         letter-spacing: 3px;
-    }
-    #root {
-        height: 80vh;
-        grid-template-columns: auto;
-        grid-template-rows: 50% 50%;
-    }
-    #zoom-buttons {
-        top: 45vh;
-        left: 92vw;
     }
 }
 

@@ -144,6 +144,7 @@ form {
     form {
         width: 90vw;
         height: 40vh;
+        min-height: 300px;
     }
     .form-iconHolder {
         border-radius: 50% 25%;
@@ -158,4 +159,15 @@ form {
     .formSubmit input {
         width: 90px;
     }
+}
+
+@media (max-height: 700px) and (orientation: landscape){
+    #formContainer {
+        height: 100vh;
+        padding: 20px 0;
+    }
+    form {
+        height: 300px;
+    }
+
 }

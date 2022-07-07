@@ -6,6 +6,7 @@
 
 {% block body %}
     <link rel="stylesheet" href="{% static 'pen/likes.css' %}">
+    <link rel="stylesheet" href="{% static 'pen/files.css' %}">
     <script src="{% static 'pen/likes.js' %}"></script>
     <div id="lastID" style="display: none;">{{ lastID }}</div>
     <div id="token">{%csrf_token%}</div>

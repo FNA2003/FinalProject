@@ -15,6 +15,8 @@ h1, h2, h3, h4, h5, h6 {
     background: #fff;
     height: 6vh;
     min-height: 50px;
+
+    border-bottom: 1px solid lightgray;
 }
 
 #nav-container ul {
@@ -35,7 +37,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .navbar-link:hover {
-    /*text-decoration: underline;*/
     font-size: large;
 }
 
