@@ -9,6 +9,57 @@ Pen is a dynamic website developed in python with the aim of allowing all types 
 - **Cascading Styles Sheets** - [ CSS ]
 - **Java Script** - [ JS ]
 
+## Distinctiveness and Complexity:
+
+In this section we are going to cover the difficulty and complexity that revolves around my project, first, we are going to start with the; **Distinctiveness**, this project were made by an idea that i had before starting the CS50W when i made my first web course, the [FreeCodeCamp](https://www.freecodecamp.org/) responsive course. I looked up the code camp page and i liked the idea of making a static page without creating any kind of file on my pc and then, i meet the [CodePen](https://codepen.io/) page, where i model my idea.
+**Complexity**, while making the code camp course, i wasn't able to model my idea with the knowledge i got from it, for obviously reasons. And then, i started the CS50X course, that leaved me up to the CS50W where i get the knowledge to make a dynamic web page, but, without letting me how to make a safe file load (safe for the user that could receive an attack) and a file with text fields.
+
+## What’s contained in each I've created
+
+Now, you will see a list of every group or pair of files that were made by me, i'm gonna told you if it has an html, css or js variant. Also, the _"Page in"_ column it's just and index for you to search inside of this ___README___ what the page does. A last thing, i can not make a specific list of what all files do (it would be very tedious to read/ write)
+
+| Basic Name | HTML | CSS | JS | Page in |
+|------------|------|-----|----|--------------|
+| edit       | ✔️   | ✔️  | ✔️ | "edit" page |
+| files      | ✔️   | ✔️  | ✔️ | "files" page |
+| fullPage   | ✔️   | ✔️  | ✔️ | "view" page  |
+| index      | ✔️   | ✔️  | ✔️ | "home" page  |
+| layout     | ✔️   | ✔️  | ❌ | template so we can make all of the pages |
+| likes      | ✔️   | ✔️  | ✔️ | "likes" page |
+| logIn      | ✔️   | ✔️  | ✔️ | "login" page |
+| profile    | ✔️   | ✔️  | ✔️ | "profile" page |
+| register   | ✔️   | ✔️  | ✔️ | "register" page |
+
+ 
+## How to run the application
+
+1. Download/ Fork the repository (if downloaded unzip the file)
+2. Open up the console inside the folder
+3. Install all of the requirements by:
+```sh
+pip3 install -r requirements.txt
+```
+4. Make the migrations on the project by writing this; 
+```sh
+python3 manage.py makemigrations pen
+```
+5. Migrate them:
+```sh
+python3 manage.py migrate
+```
+6. Run the server:
+```sh
+python3 manage.py runserver
+```
+7. Go to the url that the console show you up, it should say:
+```sh
+Django version 4.0.2, using settings 'final.settings'
+Starting development server at "http://127.0.0.1:8000/"
+Quit the server with CONTROL-C.
+```
+8. And that's all, now you can navigate through all of the pages, enjoy!
+
+_If you want to stop the server just close the console or just press "Ctrl + C" inside of it_
 
 ***
 
@@ -54,7 +105,7 @@ Here you can see the full page of a project, if the project it's empty, we will 
 The home page it's the default route on the website and, it loads the last six posts (or let us navigate for more of them, but if there is no post, we wil load a message). Also, we can see the project in a higher resolution _by pressing the fullScreen button_ like it (if we are logged in and we aren't the creator) or edit it (if we are logged in and we are the creator). Finally, at the bottom of the page we will see the contact urls, empty for this project.
 
 ***
-## MORE INFORMATION
+## TURNING POINTS
 
 1. I didn't talk about of the API routes and how they work cause they are supposed to be hidden to the user, but something that I have to mention about them, they use the csrf tokens. 
 2. The pages has some functionality more on them, check them out!
