@@ -399,7 +399,7 @@ def getPosts(request, lastId):
     
     # An array where we store more posts, the posts id should be with an pk less than 'lastId'
     # And the second array where we store an the previous array but modified
-    objects = Code.objects.all().order_by("id").filter(id__lt=lastId)[::-1][:6]
+    objects = Code.objects.all().order_by("id").filter(isPublic=True).filter(id__lt=lastId)[::-1][:6]
     array = []
 
     if (len(objects) == 0):
@@ -420,7 +420,8 @@ def getPosts(request, lastId):
             "id": i.pk,
             "projectName": i.projectName,
             "creator": i.userFK.username,
-            "liked": liked
+            "liked": liked,
+            "isPublic":i.isPublic
         })
 
     # Finally, we send back the arrays

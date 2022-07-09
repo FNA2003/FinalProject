@@ -160,7 +160,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             // First, we make a fragment so we don't refresh the DOM every post
                             const fragment = document.createDocumentFragment();
                             
-                            for (i of data["array"]) {   
+                            for (i of data["array"]) {
                                 // We make the like or edit container
                                 const added = document.createElement("div");
                                 
@@ -187,11 +187,11 @@ document.addEventListener("DOMContentLoaded", () => {
                                 full.className = "projectHolder";
                                 full.innerHTML = `<div class="fullScreenSelector">
                                                     <i class="fa fa-arrows-alt" aria-hidden="true"></i>
-                                                  </div>
-                                                  <div>
+                                                </div>
+                                                <div>
                                                     <iframe scrolling="no" src="/view/${i.projectName}/${i.creator}" sandbox></iframe>
-                                                  </div>
-                                                  <div class="projectHolder__Info">
+                                                </div>
+                                                <div class="projectHolder__Info">
                                                     <span><a href="/view/${i.projectName}/${i.creator}">Here</a> you can see the full page!</span>
                                                     <div>
                                                         <h3>${i.projectName}</h3>
@@ -199,12 +199,13 @@ document.addEventListener("DOMContentLoaded", () => {
                                                     <div>
                                                         <h4>${i.creator}</h4>
                                                     </div>
-                                                  </div>`;
+                                                </div>`;
                                 full.appendChild(added);
                                 
                                 // Store the lastId and add the container to the fragment
                                 lastId = i.id;
                                 fragment.appendChild(full);
+                                
                             }
 
                             // So we can add the fragment to the html

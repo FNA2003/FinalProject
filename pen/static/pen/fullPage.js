@@ -70,19 +70,24 @@ document.addEventListener("DOMContentLoaded", () => {
                                         rgba(16,90,185,1) 75%); `;
 
         // Then we display, and hide, all of the needed buttons
-        try {
-            document.querySelector("#likeButtonContainer").style.display = "none"
-        }
-        catch(error) {
-            /* pass */
-        }
         document.querySelector("#empty").style.display = "block";
         document.querySelector("#HOME-BUTTON").style.cssText = `display: block;
                                                                 background: transparent;`;
     } else {
         // If there is content on the page, we will display normal all of the buttons
         document.querySelector("#HOME-BUTTON").style.display = "block";
-        document.querySelector("#editButton").style.display = "block";
+        try {
+            document.querySelector("#editButton").style.display = "block";
+        }
+        catch(error) { /* PASS */ }
+    }
+
+    
+    try {
+        document.querySelector("#likeButtonContainer").style.display = "flex"
+    }
+    catch(error) {
+        pass 
     }
 
     // We select all of the buttons, add a click event and display them
